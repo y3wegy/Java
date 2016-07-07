@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="plan-project-test">
+    <test name="plan-project-test">
+        <packages>
+            <package name="com.plugin.failsafe"/>
+
+        </packages>
+        <!-- or special class-->
+        <!--<classes>
+            <class name="com.plugin.failsafe.GreetingIT"/>
+        </classes>-->
+    </test>
+</suite>
