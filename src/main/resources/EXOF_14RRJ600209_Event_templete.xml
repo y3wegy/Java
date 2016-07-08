@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<CheckPoints>
+    <Param>
+        <!--
+            these parameters will be used in keyword "CheckEventLevel",below is  their description:
+            EventStatusTimeOut:  the timeout check  event status from WP to P
+            OpenPrice:input OpenPrice value in UI.if this node not exist,will not input in UI
+            CusipOpenPrice:input CusipOpenPrice  value in UI.if this node not exist,will not input in UI
+            ReleaseType: UI release type
+                option:{
+                    RELEASE: click "Release" button
+                    SUBMIT:click "Submit" button
+                    HOLD:click "Hold"  button
+                    HOLD FOR RENOTE:click "Hold for renote" button
+                }
+            ManagerReleaseType:release type in manager role
+                option:{
+                        same as ReleaseType
+                }
+        -->
+        <EventStatusTimeOut>1000</EventStatusTimeOut>
+        <OpenPrice>10.00005</OpenPrice>
+        <PriceSource>IDC</PriceSource>
+        <CusipOpenPrice>10.006</CusipOpenPrice>
+        <ReleaseType>SUBMIT</ReleaseType>
+        <ManagerReleaseType>RELEASE</ManagerReleaseType>
+    </Param>
+    <!--
+        Setup node  will be executed in keyword 'INITALSCRIPT',include :1.event level and fund level database setup ;2.Event level SSEC MCH setup and fund level UGMM and BGIR MCH setup
+         -->
+    <SetUp>
+        <!--
+            you can set some values which can not hard code in testdata file  in node "Param" and these values will be saved in  TAF public  parameter "testparameters"  with node name,each parameter can use prior  parameter value. statement wraped by "# #" means it is variable,whose value is in "testparameters".
+            there are 3  default values  in source code ,you can use them here
+                FIRSTOFMONTH:  data type is date ,means  the first day of  this month
+                LASTOFMONTH	: data type is date,means  the  end day  of this month
+                TODAY: data type  is  date,means today
+
+            node attribute "TYPE" means  this parameter data type
+        -->
+        <Param>
+        <!--
+            saved into  "testparameters" as String：Param1='1000'
+        -->
+        <Param1 TYPE="TXT">
+            1000
+        </Param1>
+        <!--
+            if today is 3/1/2015 ,saved into  "testparameters" as String ：Param2='3/1/2015'
+        -->
+        <Param2 TYPE="TXT">
+            #TODAY#
+        </Param2>
+        <!--
+            treat Param2 value as Param3 value ,saved into  "testparameters" as String：Param3='3/1/2015'
+        -->
+        <Param3 TYPE="TXT">
+            #Param2#
+        </Param3>
+        <!--
+            1000-12=988
+            saved into  "testparameters" as number ：Param4=988
+        -->
+        <Param4 TYPE="NUM">
+            <A>#Param1#</A>
+            <B>-12</B>
+        </Param4>
+        <!--
+            ref:http://www.w3schools.com/vbscript/func_dateadd.asp
+            attribute "SCOPE" :this operation on what interval
+                option:{
+                    yyyy - Year
+                    q - Quarter
+                    m - Month
+                    y - Day of year
+                    d - Day
+                    w - Weekday
+                    ww - Week of year
+                    h - Hour
+                    n - Minute
+                    s - Second
+                        }
+            if today is 3/1/2015  ,saved into  "testparameters" as date ：Param5=3/11/2015
+        -->
+        <Param5 TYPE="DATE" SCOPE="D">
+            <A>#TODAY#</A>
+            <B>10</B>
+        </Param5>
+        <Param>
+        <!--
+            DBSetUp and SSEC will execute in keyword "INITALSCRIPT"
+        -->
+        <DBSetUp>
+            <Sql>
+                <![CDATA[
+				UPDATE OPGCEP2.RAW_TRANSACTION SET TRANSMISSION_BLOB=REPLACE(TRANSMISSION_BLOB,(SELECT TO_CHAR(substr(TRANSMISSION_BLOB,INSTR(TRANSMISSION_BLOB,'<EX_DT>'),60)) as TRANSMISSION_BLOB FROM OPGCEP2.RAW_TRANSACTION WHERE GC_GUID=HEXTORAW(#GUID#)),'<EX_DT>'||TO_CHAR(#Param5#,'YYYYMMDD')||'000000</EX_DT><EFF_DT>'||TO_CHAR(sysdate,'YYYYMMDD')||'000000</EFF_DT>') WHERE GC_GUID=HEXTORAW(#GUID#)</Sql>
+				]]>
+            </Sql>
+            <Sql>update opgcep2.gce_corp_actions set vol_bond_exch_proc_date=3 where fund_id ='26B4'</Sql>
+        </DBSetUp>
+        <SSEC>
+            <FREQ>#Param5#</FREQ>
+            <ST_INC_ANN>09</ST_INC_ANN>
+        </SSEC>
+    </SetUp>
+    <!--
+        "BeforeReplay"  will execute before  SP replay in keyword "GC_SP_REPLAY" .If verify failed ,script will terminate  and go to next test data
+    -->
+    <BeforeReplay>
+        <!--
+            attrinute "TERMINATE":whether  terminate  script after DBCheck verify complete.you should set "FALSE" always
+        -->
+        <DBCheck TERMINATE="FALSE">
+            <!--
+                TABLENAME:will print in report ,need not same as  actual table name
+                SAVE：whether save  table record as Excel  file inreport folder
+                FILENAME：saved Excel file name
+                SHEETNAME：saved Excel sheet name
+                SHEETINDEX：saved Excel sheet index number
+
+            -->
+            <Point TABLENAME="RAW_TRANSACTION" SAVE="FALSE">
+                <!--
+                    sub nodes in  node "Columns" are  what columns will be verifyed,node name is Column name.
+                    attribute "TYPE" :column data type
+                        option:{
+                                TXT,NUM,DATE:
+                                DB:expected value is another table column value
+                                }
+                    attribute "OPERAION":  verify type
+                        option:{
+                                EXPORT:print column value in report
+                                EQUAL,LARGE,SMALL:
+                                LIKE:whether column value contains expected substring ,same as ORACLE "like"
+                                }
+                    attribute "COMMENT":custom messge print in report if  column verify successfully
+                        #NAME#	 is column name
+                        #ACTUAL# is column actual value
+
+                -->
+                <Sql>SELECT TO_CHAR(COUNT(*)) as NUM FROM OPGCEP2.RAW_TRANSACTION WHERE GC_GUID = HEXTORAW(#GUID#)</Sql>
+                <Columns>
+                    <NUM TYPE="TXT" OPERATION="EQUAL" COMMENT="#NAME# is #ACTUAL#">1</NUM>
+                </Columns>
+            </Point>
+            <Point TABLENAME="RAW_TRANSACTION" SAVE="FALSE">
+                <Sql>SELECT Length(dbms_lob.substr(TRANSMISSION_BLOB, 4000, 1 )) as LEN FROM OPGCEP2.RAW_TRANSACTION
+                    WHERE GC_GUID = HEXTORAW(#GUID#)
+                </Sql>
+                <Columns>
+                    <LEN TYPE="DB" OPERATION="LARGE">SELECT 0 from dual</LEN>
+                </Columns>
+            </Point>
+        </DBCheck>
+    </BeforeReplay>
+    <!--
+        "AfterReplay" will execute after SP replay in keyword "GC_SP_REPLAY" .
+        you can use "EXPORT"  to print some column value after replay here.
+    -->
+    <AfterReplay>
+        <!--
+            because of COA2 work flow is unstable ,sometimes slowly.so script must wait.script will go to next step "DBCheck" if "Wait" node verify successfully or timeout
+            attribute "TIMEOUT": The maximum verify  time in seconds
+            attribute "Switch": "Y" means turn on ,"N" means turn off
+         -->
+        <Wait TIMEOUT="300" Switch="Y">
+            <Point TABLENAME="CORP_ACTION_MASTER_EVENT" SAVE="FALSE">
+                <Sql>SELECT TO_CHAR(COUNT(*)) as NUM FROM OPGCEP2.CORP_ACTION_MASTER_EVENT WHERE CA_EVENT_ID
+                    =#EVENTID#
+                </Sql>
+                <Columns>
+                    <NUM TYPE="TXT" OPERATION="EQUAL">1</NUM>
+                </Columns>
+            </Point>
+        </Wait>
+        <DBCheck TERMINATE="FALSE">
+            <Point TABLENAME="CORP_ACTION_NOTIFICATION" SAVE="FALSE">
+                <Sql>select rawtohex(ca_notification_guid) as ca_notification_guid, ca_master_event_id, ca_event_id,
+                    source_id, gcas_action_type_cd, ca_notification_type_cd, gcas_option_cd,
+                    to_char(ca_event_processing_date, 'yyyy/mm/dd HH24:MI:SS')as ca_event_processing_date,
+                    to_char(created_at, 'yyyy/mm/dd HH24:MI:SS')as created_at, gc_process_flg,to_char(expiration_date,
+                    'yyyy/mm/dd HH24:MI:SS')as expiration_date,to_char(withdrawal_expiration_date, 'yyyy/mm/dd
+                    HH24:MI:SS') as withdrawal_expiration_date,call_redemption_price_amt, call_redemption_price_ccy_cd,
+                    accr_interest_rt, entitlement_rt, mandatory_voluntary_cd from opgcep2.corp_action_notification where
+                    ca_notification_guid = hextoraw(#GUID#)
+                </Sql>
+                <Columns>
+                    <gcas_action_type_cd TYPE="TXT" OPERATION="EXPORT" COMMENT="#NAME#: #ACTUAL#"></gcas_action_type_cd>
+                    <ca_notification_type_cd TYPE="TXT" OPERATION="EXPORT"
+                                             COMMENT="#NAME#: #ACTUAL#"></ca_notification_type_cd>
+                    <mandatory_voluntary_cd TYPE="TXT" OPERATION="EXPORT"
+                                            COMMENT="#NAME#: #ACTUAL#"></mandatory_voluntary_cd>
+                    <expiration_date TYPE="TXT" OPERATION="EXPORT" COMMENT="#NAME#: #ACTUAL#"></expiration_date>
+                    <withdrawal_expiration_date TYPE="TXT" OPERATION="EXPORT"
+                                                COMMENT="#NAME#: #ACTUAL#"></withdrawal_expiration_date>
+                    <ca_event_processing_date TYPE="TXT" OPERATION="EXPORT"
+                                              COMMENT="#NAME#: #ACTUAL#"></ca_event_processing_date>
+                </Columns>
+            </Point>
+        </DBCheck>
+    </AfterReplay>
+    <!--
+        "BeforeEventLevel"  will execute before UI release in keyword "CheckEventLevel" ,if verify failed ,script will terminate and go to next test data
+    -->
+    <BeforeEventLevel>
+        <Wait TIMEOUT="300" Switch="Y">
+            <Point TABLENAME="CORP_ACTION_MASTER_EVENT" SAVE="FALSE">
+                <Sql>SELECT TO_CHAR(COUNT(*)) as NUM FROM OPGCEP2.CORP_ACTION_MASTER_EVENT WHERE CA_EVENT_ID
+                    =#EVENTID#
+                </Sql>
+                <Columns>
+                    <NUM TYPE="TXT" OPERATION="EQUAL">1</NUM>
+                </Columns>
+            </Point>
+        </Wait>
+        <DBCheck TERMINATE="FALSE">
+            <Point TABLENAME="CORP_ACTION_NOTIFICATION" SAVE="FALSE">
+                <Sql>SELECT TO_CHAR(COUNT(*)) as NUM FROM OPGCEP2.CORP_ACTION_NOTIFICATION WHERE CA_NOTIFICATION_GUID =
+                    HEXTORAW(#GUID#)
+                </Sql>
+                <Columns>
+                    <NUM TYPE="TXT" OPERATION="EQUAL">1</NUM>
+                </Columns>
+            </Point>
+            <!--
+                below point node just for save DB record to Excel file,no column verify
+            -->
+            <Point TABLENAME="CORP_ACTION_NOTIFICATION" SAVE="TRUE" FILENAME="EXOF_14RRJ600209_INBOUND"
+                   SHEETNAME="NOTIFICATION" SHEETINDEX="1">
+                <Sql>select rawtohex(ca_notification_guid) as ca_notification_guid, ca_master_event_id, ca_event_id,
+                    source_id, gcas_action_type_cd, ca_notification_type_cd, gcas_option_cd,
+                    to_char(ca_event_processing_date, 'yyyy/mm/dd HH24:MI:SS')as ca_event_processing_date,
+                    to_char(created_at, 'yyyy/mm/dd HH24:MI:SS')as created_at,
+                    gc_process_flg,to_char(call_redemption_date, 'yyyy/mm/dd HH24:MI:SS')as
+                    call_redemption_date,to_char(payable_date, 'yyyy/mm/dd HH24:MI:SS') as
+                    payable_date,call_redemption_price_amt, call_redemption_price_ccy_cd, accr_interest_rt,
+                    entitlement_rt from opgcep2.corp_action_notification where ca_notification_guid = hextoraw(#GUID#)
+                </Sql>
+                <Columns>
+                </Columns>
+            </Point>
+        </DBCheck>
+    </BeforeEventLevel>
+    <!--
+        EventFlowBoost  will execute in keyword "CheckEventLevel" .if event status is "WP", means maybe exist delayretry activity, script will execute these sqls to boost work flow.
+    -->
+    <EventFlowBoost Switch="Y">
+        <DB>
+            <Sql>UPDATE GCE_META.GCAL_WORKFLOW_ACTIVITY SET EXPIRATION_TIME=SYSTIMESTAMP WHERE uc_txn_id = (SELECT
+                UC_TXN_ID FROM OPGCEP2.GCAL_USE_CASE_TRANSACTION WHERE GC_GUID =hextoraw(#GUID#) AND SCENARIO_ID IN
+                ('3202','3302','4501'))and STATUS='NEW' and EXPIRATION_TIME > TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP,
+                'DD-MON-RR HH.MI.SS.FF PM'))
+            </sql>
+            <Sql>UPDATE GCE_META.GCAL_WORKFLOW_ACTIVITY SET EXPIRATION_TIME=SYSTIMESTAMP WHERE CUSTOM_DATA_NUM_1 in
+                (SELECT TASK_ID FROM OPGCEP2.GCAL_EXECUTION_TASK WHERE TASK_STATE='RETRY' and UC_TXN_ID in (SELECT
+                UC_TXN_ID FROM OPGCEP2.GCAL_USE_CASE_TRANSACTION WHERE GC_GUID =hextoraw(#GUID#) AND SCENARIO_ID IN
+                ('3202','3302','4501')))and STATUS='NEW' and EXPIRATION_TIME > TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP,
+                'DD-MON-RR HH.MI.SS.FF PM'))
+            </Sql>
+        </DB>
+    </EventFlowBoost>
+    <!--
+        EventDoneVerify will  execute in keyword "CheckEventLevel" .IF column "RESULT_CODE"  value is "DONE" in table "GCAL_USE_CASE_TRANSACTION",script will execute this node  to verify  whether Event level is done.if not,script will  check event status again and again
+    -->
+    <EventDoneVerify>
+        <DBCheck TERMINATE="FALSE">
+            <Point TABLENAME="GCAL_USE_CASE_TRANSACTION" SAVE="FALSE">
+                <Sql>SELECT STATUS FROM OPGCEP2.GCAL_USE_CASE_TRANSACTION WHERE GC_GUID = HEXTORAW(#GUID#) AND
+                    SCENARIO_ID='4501'
+                </Sql>
+                <Columns>
+                    <STATUS TYPE="TXT" OPERATION="EQUAL">COA16_EL_VERIY</STATUS>
+                </Columns>
+            </Point>
+        </DBCheck>
+    </EventDoneVerify>
+    <!--
+        ignore this node
+    -->
+    <EventUICheck>
+        <ValueCheck TERMINATE="FALSE">
+            <!--
+            <Point>
+                <Description>
+                    <class>x-grid3-cell-inner x-grid3-col-TOLERANCE_PERCENT</class>
+                </Description>
+                <Value TYPE="TXT" OPERATION="EQUAL">2.0000</Value>
+            </Point>
+            -->
+        </ValueCheck>
+    </EventUICheck>
+    <!--
+        AfterEventLevel will  execute after Event UI release in keyword "CheckEventLevel"
+    -->
+    <AfterEventLevel>
+        <DBCheck TERMINATE="FALSE">
+            <Point TABLENAME="GCAL_USE_CASE_TRANSACTION" SAVE="FALSE">
+                <Sql>SELECT STATUS FROM OPGCEP2.GCAL_USE_CASE_TRANSACTION WHERE GC_GUID = HEXTORAW(#GUID#) AND
+                    SCENARIO_ID='4501'
+                </Sql>
+                <Columns>
+                    <STATUS TYPE="TXT" OPERATION="EQUAL">COA16_EL_VERIY</STATUS>
+                </Columns>
+            </Point>
+            <Point TABLENAME="gcal_use_case_transaction" SAVE="TRUE" FILENAME="EXOF_14RRJ600209_EVENT" SHEETNAME="UCTXN"
+                   SHEETINDEX="1">
+                <Sql>SELECT UC_TXN_ID,SCENARIO_ID,rawtohex(GC_GUID) as GC_GUID,status, RESULT_CODE,to_char(UPDATED_AT,
+                    'yyyy/mm/dd HH24:MI:SS') as UPDATED_AT FROM OPGCEP2.gcal_use_case_transaction WHERE GC_GUID =
+                    hextoraw(#GUID#) ORDER BY CREATED_AT
+                </Sql>
+                <Columns>
+                </Columns>
+            </Point>
+            <Point TABLENAME="CORP_ACTION_MASTER_EVENT,corp_action_status_type" SAVE="TRUE"
+                   FILENAME="EXOF_14RRJ600209_EVENT" SHEETNAME="EVENT_STATUS" SHEETINDEX="2">
+                <Sql>SELECT CAFP.CA_MASTER_EVENT_ID,to_char(CAFP.CA_EVENT_PROCESSING_DATE, 'yyyy/mm/dd HH24:MI:SS') as
+                    CA_EVENT_PROCESSING_DATE,CAFP.CA_MASTER_EVENT_ID,CAFP.CA_EVENT_ID,CAST.CA_STATUS_TYPE_CD,CAST.REASON_TXT,
+                    CAST.STATUS_TXT from OPGCEP2.CORP_ACTION_MASTER_EVENT cafp, opgcep2.corp_action_status_type cast
+                    where cafp.ca_status_type_cd = cast.ca_status_type_cd and cafp.ca_event_id = #EVENTID#
+                </Sql>
+                <Columns>
+                </Columns>
+            </Point>
+            <Point TABLENAME="MYVIEW_ALERT_DETAIL" SAVE="TRUE" FILENAME="EXOF_14RRJ600209_EVENT" SHEETNAME="ALERT"
+                   SHEETINDEX="3">
+                <Sql>SELECT
+                    Alert_id,EVENT_PROCESSING_CD,UC_TXN_ID,GC_TRANSACTION_ID,GC_TRANS_ID_TYPE_CD,to_char(SENT_MSG) as
+                    SENT_MSG,CLOSED_FLG,to_char(CREATED_AT, 'yyyy/mm/dd HH24:MI:SS') as CREATED_AT FROM
+                    OPGCEP2.MYVIEW_ALERT_DETAIL WHERE UC_TXN_ID =(select * from ( SELECT UC_TXN_ID FROM
+                    OPGCEP2.GCAL_USE_CASE_TRANSACTION WHERE GC_GUID = HEXTORAW(#GUID#) ORDER BY CREATED_AT desc ) where
+                    rowNum=1)
+                </Sql>
+                <Columns>
+                </Columns>
+            </Point>
+        </DBCheck>
+    </AfterEventLevel>
+
+    <!--
+        associate  Fund level verify XML file in this node "Funds"
+        you don't need add all funds to here ,just add these funds you need verify
+        base directory is "usecaseVerify"
+    -->
+    <Funds>
+        <Fund FUNDID="26B4">EXOF_14RRJ600209_Fund_temeplete\EXOF_14RRJ600209_26B4_templete.xml</Fund>
+    </Funds>
+    <!--
+        custom each step description in sheet "ManualSteps" of Script file,these description will replace script's description in report,but will not  change  Script file
+        node name can not contain space :"Step 1" ->"Step1"
+        "COA2_INITAL" is script file name
+        "Step1","Step2" is the first column  value in "ManualSteps" sheet
+    -->
+    <ManualSteps>
+        <COA2_INITAL>
+            <Step1>
+                <StepDescription>Step 1 StepDescription(configured)</StepDescription>
+                <ExpectedResult>Step 1 StepDescription(configured)</ExpectedResult>
+            </Step1>
+            <Step2>
+                <StepDescription>Step 2 StepDescription(configured)</StepDescription>
+                <ExpectedResult>Step 2 StepDescription(configured)</ExpectedResult>
+            </Step2>
+        </COA2_INITAL>
+    </ManualSteps>
+    <!--
+        custom  some message in report
+        you can ignore these nodes ,unless you want print some message associate with usecase
+    -->
+    <StepComment>
+        <CleanAndReplaceParamComment>
+            Clean and replace param successfully!(configured)
+        </CleanAndReplaceParamComment>
+        <TestDataSetupStartComment>
+            #EVENTID# setup start(configured)
+        </TestDataSetupStartComment>
+        <!--execute database and MCH setup-->
+        <TestDataSetupSuccessComment>
+            Testdata setup is done successfully(configured)
+        </TestDataSetupSuccessComment>
+
+        <ReplayStartComment>
+            Replay start(configured)
+        </ReplayStartComment>
+        -->
+        <!--execute BeforeReplay Verify  configured in XML-->
+        <BeforeReplayComment>
+            Database verify done,now script will Login UI and replay(configured)
+        </BeforeReplayComment>
+        <!--GUID Replay-->
+        <AfterReplayComment>
+            UI replay is Done,GUID=#GUID#(configured)
+        </AfterReplayComment>
+
+        <!--Event level verify start-->
+        <EventLevelStartComment>
+            COA16 Full note come to Gold Copy,and need verify database data :(configured)
+        </EventLevelStartComment>
+        <!--execute BeforeEventlevel verify configured in XML-->
+        <BeforeEventUIReleaseComment>
+            Event UI release begain :(configured)
+        </BeforeEventUIReleaseComment>
+        <!-- execute event UI release -->
+        <AfterEventUIReleaseComment>
+            Event UI release Done,verify database record:(configured)
+        </AfterEventUIReleaseComment>
+        <!--execute AfterEventLevel verify  configured in XML-->
+
+        <!--Fund level start-->
+        <FundLevelStartComment>
+            Event status is Done,before fund level start,need verify each fund attribute :(configured)
+        </FundLevelStartComment>
+        <!--execute BeforeFundLevel verify configured in XML-->
+        <BeforeFundStatusComment>
+            Each fund attribute verify is done,each fund status:(configured)
+        </BeforeFundStatusComment>
+        <!--print each fund status-->
+        <BeforeFundUIReleaseComment>
+            Each fund attribute verify done,fund UI release:(configured)
+        </BeforeFundUIReleaseComment>
+        <!--execute Fund UI release -->
+        <AfterFundReleaseComment>
+            after UI release,each fund database verify begain :(configured)
+        </AfterFundReleaseComment>
+        <!--execute AfterFundLevel verify configured in XML-->
+        <AfterFundStatusComment>
+            Each fund UI release is Done,each fund status:(configured)
+        </AfterFundStatusComment>
+        <!--print each fund status-->
+        <BeforeCARTAndMCHVerifyComment>
+            Each fund database verify is Done,now begain CART and MCH verify(configured)
+        </BeforeCARTAndMCHVerifyComment>
+        -->
+        <!--each fund FundCartCheck and BeforeCancelCICSCheck verify execute configured in XML-->
+
+        <CancelStartComment>
+            fund level verify is done,UI cancel CICS for next replay(configured)
+        </CancelStartComment>
+        <AfterCancelComment>
+            After UI cancel ,script need check MCH BRKP to ensure cancel successfully:(configured)
+        </AfterCancelComment>
+    </StepComment>
+
+    <!--
+        UI cancel utility parameter,you should not change these node value
+    -->
+    <UICancelParam Switch="Y">
+        <Range>PARENTANDCHILD</Range>
+        <Action>UNSETLANDCANCEL</Action>
+        <Date>
+            <Option>CURRENTDATE</Option>
+            <EFFDate></EFFDate>
+            <ReportDate></ReportDate>
+        </Date>
+        <IgnorePS>Y</IgnorePS>
+    </UICancelParam>
+    <!--
+        EndSetUp will be executed in keyword "COA2_ENDSETUP"  to clean up memory for next test data execute
+        ScriptTerminateFlag: this node name is parameter name in memory
+        "FALSE" is expected value at the end of execute
+    -->
+    <EndSetUp>
+        <ScriptTerminateFlag>FALSE</ScriptTerminateFlag>
+    </EndSetUp>
+
+</CheckPoints>
