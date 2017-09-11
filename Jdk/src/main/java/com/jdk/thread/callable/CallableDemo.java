@@ -1,5 +1,7 @@
 package com.jdk.thread.callable;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -13,11 +15,12 @@ import java.util.concurrent.*;
  */
 public class CallableDemo {
 
+    private static final Logger logger = Logger.getLogger(CallableDemo.class);
     private static final int POOL_SIZE = 3;
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(POOL_SIZE);
-        List<Future<String>> futureList = new ArrayList<Future<String>>();
+        List<Future<String>> futureList = new ArrayList<>();
 
         for (int i = 0; i < 5; i++)
             futureList.add(executorService.submit(new CallExecute(i)));
@@ -25,18 +28,15 @@ public class CallableDemo {
         executorService.shutdown();
         try {
             for (Future<String> future : futureList) {
-                if (future.isDone())
-                    System.out.println(future.get());
+                logger.info(future.get());
             }
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (ExecutionException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+           logger.error(e);
         } finally {
             executorService.shutdown();
         }
-        System.out.println("End ");
+        logger.info("End ");
     }
 }
 
@@ -48,8 +48,9 @@ class CallExecute implements Callable<String> {
     }
 
     @Override
-    public String call() {
+    public String call() throws InterruptedException {
         Thread.yield();
+        Thread.sleep(5000);
         return " Thread is running, id :" + id;
     }
 }

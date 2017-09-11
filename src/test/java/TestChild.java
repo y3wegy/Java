@@ -37,4 +37,30 @@ public class TestChild {
         System.out.println(org.apache.commons.lang.StringUtils.join(s.toArray(),","));
     }
 
+    @Test
+    public void testEnum(){
+        System.out.println(Type.Admin.name());
+        System.out.println(Type.Admin.toString());
+        System.out.println(Type.Admin.getKey());
+    }
+
+}
+
+enum Type{
+    User("userA"),Admin("AdminA");
+    private String key;
+
+
+    Type(String keyStr){
+        this.key=keyStr;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
 }

@@ -24,5 +24,16 @@ public class TestAbc extends TestCase {
         System.out.println("ADC");
     }
 
+    @Test
+    public void testReplaceNull(){
+        try {
+            "123".replaceAll("1",null==null?"":null);
+
+            String value = String.valueOf(null);
+            assertEquals(null,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -9,15 +9,78 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Grammar</artifactId>
+    <artifactId>JDK</artifactId>
+
+    <properties>
+        <skip.unit.test>false</skip.unit.test>
+        <test.failed.ignore>true</test.failed.ignore>
+    </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.6.5.201403032054</version>
+                <executions>
+                    <!--
+                        Prepares the property pointing to the JaCoCo runtime agent which
+                        is passed as VM argument when Maven the Surefire plugin is executed.
+                    -->
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
+                            <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                            <!--
+                                Sets the name of the property containing the settings
+                                for JaCoCo runtime agent.
+                            -->
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <!--
+                        Ensures that the code coverage report for unit tests is created after
+                        unit tests have been run.
+                    -->
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Sets the path to the file which contains the execution data. -->
+                            <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                            <!-- Sets the output directory for the code coverage report. -->
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <includes>
+                        <include>com/plugin/**/*Test.java</include>
+                    </includes>
+                    <argLine>${surefireArgLine}</argLine>
+                    <skipTests>${skip.unit.test}</skipTests>
+                    <testFailureIgnore>${test.failed.ignore}</testFailureIgnore>
                 </configuration>
             </plugin>
         </plugins>
@@ -75,7 +138,17 @@
             <version>12.1.0.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20080701</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
-
 </project>
