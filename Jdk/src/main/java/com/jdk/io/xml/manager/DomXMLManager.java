@@ -2,7 +2,8 @@ package com.jdk.io.xml.manager;
 
 import com.jdk.io.xml.XMLException;
 import com.jdk.io.xml.bean.Student;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public class DomXMLManager implements XMLManager {
 
-    public static final Logger logger = Logger.getLogger(DomXMLManager.class);
+    public static final Logger logger = LoggerFactory.getLogger(DomXMLManager.class);
     private String filepath;
 
     public DomXMLManager(String filepath) {
@@ -41,7 +42,7 @@ public class DomXMLManager implements XMLManager {
         try {
             documentBuilder = getDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
         if (documentBuilder == null) {
@@ -98,7 +99,7 @@ public class DomXMLManager implements XMLManager {
             }
             return studentList;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
 
@@ -138,7 +139,7 @@ public class DomXMLManager implements XMLManager {
             }
             saveFile(filepath, document);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
     }
@@ -158,7 +159,7 @@ public class DomXMLManager implements XMLManager {
             domSource = new DOMSource(document);
             streamResult = new StreamResult(outputStreamWriter);
         } catch (IOException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
         try {
@@ -169,7 +170,7 @@ public class DomXMLManager implements XMLManager {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             transformer.transform(domSource, streamResult);
         } catch (TransformerException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
 

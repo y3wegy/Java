@@ -2,7 +2,6 @@ package com.jdk.io.xml.manager;
 
 import com.jdk.io.xml.XMLException;
 import com.jdk.io.xml.bean.Student;
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -10,6 +9,8 @@ import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +23,7 @@ import java.util.List;
  * Created by a549238 on 1/27/2016.
  */
 public class Dom4JXMLManager implements XMLManager {
-    public static final Logger logger = Logger.getLogger(Dom4JXMLManager.class);
+    public static final Logger logger = LoggerFactory.getLogger(Dom4JXMLManager.class);
     private String filepath;
 
     public Dom4JXMLManager(String filepath) {
@@ -45,7 +46,7 @@ public class Dom4JXMLManager implements XMLManager {
         try {
             saveFile(document, filepath);
         } catch (IOException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
     }
@@ -58,7 +59,7 @@ public class Dom4JXMLManager implements XMLManager {
         try {
             document = saxReader.read(new File(filepath));
         } catch (DocumentException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
         Element root = document.getRootElement();
@@ -113,7 +114,7 @@ public class Dom4JXMLManager implements XMLManager {
             }
             saveFile(document, filepath);
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new XMLException(e);
         }
 
