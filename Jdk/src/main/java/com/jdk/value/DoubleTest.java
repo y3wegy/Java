@@ -1,6 +1,6 @@
 package com.jdk.value;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;

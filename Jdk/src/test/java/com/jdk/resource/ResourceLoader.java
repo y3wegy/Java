@@ -1,7 +1,8 @@
 package com.jdk.resource;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.security.CodeSource;
@@ -12,7 +13,7 @@ import java.security.ProtectionDomain;
  */
 public class ResourceLoader {
 
-    private static final Logger logger = Logger.getLogger(ResourceLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResourceLoader.class);
     @Test
     public void testSourceCode() {
         ProtectionDomain domain = ResourceLoader.class.getProtectionDomain();

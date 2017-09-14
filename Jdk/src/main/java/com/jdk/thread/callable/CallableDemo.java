@@ -1,6 +1,8 @@
 package com.jdk.thread.callable;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.concurrent.*;
  */
 public class CallableDemo {
 
-    private static final Logger logger = Logger.getLogger(CallableDemo.class);
+    private static final Logger logger = LoggerFactory.getLogger(CallableDemo.class);
     private static final int POOL_SIZE = 3;
 
     public static void main(String[] args) {
@@ -32,7 +34,7 @@ public class CallableDemo {
             }
 
         } catch (Exception e) {
-           logger.error(e);
+           logger.error(e.toString());
         } finally {
             executorService.shutdown();
         }

@@ -1,6 +1,6 @@
 package com.jdk.excel.factory;
 
-import com.jdk.excel.bean.Production;
+import com.jdk.bean.Production;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,7 @@
 package com.jdk.generic;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,27 +13,21 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class GenericMethod {
-    public static void main(String[] args) {
-        GenericMethod demo = new GenericMethod();
-        demo.function("ssss");
-
-        demo.function2(demo.<String, String>map());
-    }
-
+    public static final Logger logger = Logger.getLogger(GenericMethod.class);
     /*
  generaic  use in method
   */
     public <U, V> void function(U u)
 
     {
-        System.out.println(u);
+        logger.info(u);
     }
 
-    public void function2(Map<String, String> map) {
-        System.out.println("sddf");
+    public <U, V> void function2(Map<U, V> map) {
+        logger.info("execute in function2");
     }
 
-    private <K, V> Map<K, V> map() {
+    public <K, V> Map<K, V> map() {
         return new HashMap<K, V>();
     }
 }

@@ -1,14 +1,15 @@
 package com.jdk.pattern.chain.handler;
 
 import com.jdk.pattern.chain.Levels;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by a549238 on 6/7/2016.
  */
 public class Handler01 extends AbstractHandler {
 
-    private static final Logger logger = Logger.getLogger(Handler01.class);
+    private static final Logger logger = LoggerFactory.getLogger(Handler01.class);
 
     @Override
     public Levels getHandleLevel() {
