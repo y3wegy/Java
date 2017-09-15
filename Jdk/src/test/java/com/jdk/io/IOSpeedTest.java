@@ -17,7 +17,7 @@ public class IOSpeedTest {
     private static final int BYTE_SIZE = INT_SIZE * 4;
     private static final int INT_BUFF_SIZE = 200000;
 
-    private static final String FILE_PATH = IOSpeedTest.class.getClassLoader().getResource(".") + "out.txt";
+    private static final String FILE_PATH = IOSpeedTest.class.getClassLoader().getResource(".").getPath() + "out.txt";
 
     @Before
     public void setUp() throws IOException {
@@ -25,8 +25,6 @@ public class IOSpeedTest {
         if (file.exists()) {
             file.delete();
         }
-        file.createNewFile();
-
     }
 
     private static Tester[] tests = {
@@ -155,14 +153,13 @@ public class IOSpeedTest {
         }
 
         public void runTest() {
-            logger.info("name:" + name);
             long start = System.nanoTime();
             try {
                 test();
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            System.out.format("    %.2f \n", (System.nanoTime() - start) / 1.0e9);
+            logger.info(String.format("%s   %.2f \n",name, (System.nanoTime() - start) / 1.0e9));
         }
 
         public abstract void test() throws IOException;
