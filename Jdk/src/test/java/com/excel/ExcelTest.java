@@ -13,14 +13,14 @@ public class ExcelTest {
     @Test
     public void testJXL() throws Exception {
         IExcel excelManager  = new JXLExcelManager();
-        excelManager.createExcel(JXL_EXCEL_NAME, "JXL_TEST", AbstractExcelManager.SIZE);
+        excelManager.createExcel(JXL_EXCEL_NAME, "JXL_TEST", IExcel.SIZE);
         excelManager.readExcel(JXL_EXCEL_NAME, "JXL_TEST");
     }
 
     @Test
     public void testPOI() throws Exception {
         IExcel excelManager = new POIExcelManager();
-        excelManager.createExcel(POI_EXCEL_NAME, "POI_TEST", AbstractExcelManager.SIZE);
+        excelManager.createExcel(POI_EXCEL_NAME, "POI_TEST", IExcel.SIZE);
         excelManager.readExcel(POI_EXCEL_NAME, "POI_TEST");
 
     }
