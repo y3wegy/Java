@@ -19,6 +19,8 @@ public class ByteBufferTest {
     private static final String FILE_PATH = ByteBufferTest.class.getClassLoader().getResource("").getPath() + "out.txt";
 
     private static final String SYSTEM_CHARSET = System.getProperty("file.encoding");
+    private static final Charset charSet = Charset.forName(SYSTEM_CHARSET);
+
     @Before
     public void setUp() throws Exception {
         File file = new File(FILE_PATH);
@@ -50,6 +52,11 @@ public class ByteBufferTest {
         Assert.assertEquals(byteBuffer.capacity(), compactByteBuffer.capacity());
     }
 
+    /**
+     * decode
+     *
+     * @throws Exception
+     */
     @Test
     public void testReadFileByteBuffer() throws Exception {
         FileChannel fileChannel = null;
@@ -62,19 +69,52 @@ public class ByteBufferTest {
             }
         }
 
-        Charset charSet = Charset.forName(SYSTEM_CHARSET);
         CharsetDecoder decoder = charSet.newDecoder();
         try {
             fileChannel = new FileInputStream(FILE_PATH).getChannel();
             ByteBuffer byteBuffer = ByteBuffer.allocate(BUFF_SIZE);
             while (fileChannel.read(byteBuffer) != -1) {
                 byteBuffer.flip();
-                logger.info(String.format("As Charbuffer will not display:%s", byteBuffer.asCharBuffer()));
+                logger.info(String.format("As Charbuffer will not display correctly:%s", byteBuffer.asCharBuffer()));
                 byteBuffer.rewind();
-                logger.info(String.format("Use System decoder:%s",decoder.decode(byteBuffer)));
+                logger.info(String.format("Use System decoder:%s", decoder.decode(byteBuffer)));
+                byteBuffer.clear();
             }
         } finally {
+            if (fileChannel != null) {
+                fileChannel.close();
+            }
+        }
+    }
 
+    /**
+     * encode bytebuffer
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testEncodeByteBuffer() throws Exception {
+        FileChannel fileChannel = null;
+        try {
+            fileChannel = new FileOutputStream(FILE_PATH).getChannel();
+            fileChannel.write(ByteBuffer.wrap("testReadFileByteBuffer".getBytes(SYSTEM_CHARSET)));
+        } finally {
+            if (fileChannel != null) {
+                fileChannel.close();
+            }
+        }
+
+        try {
+            fileChannel = new FileInputStream(FILE_PATH).getChannel();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(BUFF_SIZE);
+            while (fileChannel.read(byteBuffer) != -1) {
+                byteBuffer.flip();
+                logger.info(String.format("As Charbuffer:%s", byteBuffer.asCharBuffer()));
+            }
+        } finally {
+            if (fileChannel != null) {
+                fileChannel.close();
+            }
         }
     }
 }
