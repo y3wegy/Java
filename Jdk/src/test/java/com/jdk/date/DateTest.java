@@ -1,6 +1,5 @@
 package com.jdk.date;
 
-import com.test.Demo;
 import oracle.sql.TIMESTAMP;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * Created by a549238 on 4/27/2015.
  */
 public class DateTest {
-    private static final Logger logger = LoggerFactory.getLogger(Demo.class);
+    private static final Logger logger = LoggerFactory.getLogger(DateTest.class);
     @Test
     public void testCalendar2SqlTimestamp() {
         Calendar calendar = Calendar.getInstance();
