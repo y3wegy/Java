@@ -1,7 +1,7 @@
-package com.jdk.bean.pattern.chain.handler;
+package com.pattern.chain.handler;
 
-import com.jdk.bean.pattern.chain.Levels;
-import com.jdk.bean.pattern.chain.request.AbstractRequest;
+import com.pattern.chain.Levels;
+import com.pattern.chain.request.AbstractRequest;
 import org.apache.log4j.Logger;
 
 /**

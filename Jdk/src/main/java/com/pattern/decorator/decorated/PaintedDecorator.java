@@ -1,7 +1,7 @@
-package com.jdk.bean.pattern.decorator.decorated;
+package com.pattern.decorator.decorated;
 
-import com.jdk.bean.pattern.decorator.Room;
-import com.jdk.bean.pattern.decorator.RoomDecorator;
+import com.pattern.decorator.Room;
+import com.pattern.decorator.RoomDecorator;
 
 /**
  * Created by a549238 on 3/24/2016.

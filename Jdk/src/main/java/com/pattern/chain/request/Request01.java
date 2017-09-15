@@ -1,6 +1,6 @@
-package com.jdk.bean.pattern.chain.request;
+package com.pattern.chain.request;
 
-import com.jdk.bean.pattern.chain.Levels;
+import com.pattern.chain.Levels;
 
 /**
  * Created by a549238 on 6/7/2016.
