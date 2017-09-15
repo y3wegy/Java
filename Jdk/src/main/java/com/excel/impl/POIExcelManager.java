@@ -103,7 +103,7 @@ public class POIExcelManager implements IExcel {
     private int praseXLS(HSSFWorkbook workbook) {
         if (workbook == null) {
             logger.info("Work book is null ,return !");
-            return;
+            return -1;
         }
         HSSFSheet sheet = null;
         HSSFRow row = null;
