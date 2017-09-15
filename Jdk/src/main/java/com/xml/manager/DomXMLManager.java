@@ -1,7 +1,7 @@
-package com.jdk.xml.manager;
+package com.xml.manager;
 
-import com.jdk.xml.XMLException;
-import com.jdk.xml.bean.Student;
+import com.xml.XMLException;
+import com.xml.bean.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;

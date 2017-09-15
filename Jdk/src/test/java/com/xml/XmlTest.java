@@ -1,10 +1,10 @@
-package com.jdk.xml;
+package com.xml;
 
-import com.jdk.xml.bean.Student;
-import com.jdk.xml.manager.Dom4JXMLManager;
-import com.jdk.xml.manager.DomXMLManager;
-import com.jdk.xml.manager.SAXMLManager;
-import com.jdk.xml.manager.XMLManager;
+import com.xml.bean.Student;
+import com.xml.manager.Dom4JXMLManager;
+import com.xml.manager.DomXMLManager;
+import com.xml.manager.SAXMLManager;
+import com.xml.manager.XMLManager;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
-package com.jdk.xml.manager;
+package com.xml.manager;
 
-import com.jdk.xml.XMLException;
-import com.jdk.xml.bean.Student;
+import com.xml.XMLException;
+import com.xml.bean.Student;
 
 import java.util.List;
 

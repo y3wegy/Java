@@ -1,15 +1,15 @@
-package com.jdk.excel.impl;
+package com.excel.impl;
 
+import com.excel.IExcel;
 import com.jdk.bean.Production;
-import com.jdk.excel.AbstractExcelManager;
-import com.jdk.excel.factory.ProductionFactory;
+import com.excel.factory.ProductionFactory;
 import jxl.*;
 import jxl.format.Colour;
 import jxl.format.UnderlineStyle;
 import jxl.read.biff.BiffException;
 import jxl.write.*;
 import jxl.write.Number;
-import jxl.write.biff.RowsExceededException;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class JXLExcelManager extends AbstractExcelManager {
-
+public class JXLExcelManager implements IExcel {
+    public static final Logger logger = Logger.getLogger(JXLExcelManager.class);
 
     @Override
     public void createExcel(String fileName, String sheetName, int size) {
@@ -48,13 +48,9 @@ public class JXLExcelManager extends AbstractExcelManager {
             workbook.write();
             workbook.close();
             long end = System.nanoTime();
-            System.out.println("now:" + dateFormat.format(new Date()) + ",JXL write " + SIZE + " rows take time:" + TimeUnit.MILLISECONDS.convert(end - start, TimeUnit.NANOSECONDS) + " ms");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (RowsExceededException e) {
-            e.printStackTrace();
-        } catch (WriteException e) {
-            e.printStackTrace();
+            logger.info("now:" + dateFormat.format(new Date()) + ",JXL write " + SIZE + " rows take time:" + TimeUnit.MILLISECONDS.convert(end - start, TimeUnit.NANOSECONDS) + " ms");
+        } catch (IOException | WriteException e) {
+            logger.error(e);
         }
     }
 
@@ -69,17 +65,15 @@ public class JXLExcelManager extends AbstractExcelManager {
                 Cell[] cells = sheet.getRow(i);
                 for (Cell cell : cells) {
                     if (cell.getType() == CellType.NUMBER)
-                        System.out.println(((NumberCell) cell).getValue());
+                        logger.info(((NumberCell) cell).getValue());
                     else
-                        System.out.println(cell.getContents() + " ");
+                        logger.info(cell.getContents() + " ");
                 }
             }
             workbook.close();
-            System.out.println("now:" + dateFormat.format(new Date()) + ",Jxl read " + (i - 1) + " rows take time:" + TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS) + " ms");
-        } catch (BiffException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("now:" + dateFormat.format(new Date()) + ",Jxl read " + (i - 1) + " rows take time:" + TimeUnit.MILLISECONDS.convert(System.nanoTime() - start, TimeUnit.NANOSECONDS) + " ms");
+        } catch (BiffException|IOException e) {
+            logger.error(e);
         }
     }
 

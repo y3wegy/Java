@@ -1,12 +1,14 @@
-package com.jdk.excel.impl;
+package com.excel.impl;
 
+import com.excel.IExcel;
 import com.jdk.bean.Production;
-import com.jdk.excel.AbstractExcelManager;
-import com.jdk.excel.factory.ProductionFactory;
+import com.excel.factory.ProductionFactory;
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.util.IOUtils;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -17,8 +19,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class POIExcelManager extends AbstractExcelManager {
-
+public class POIExcelManager implements IExcel {
+    public static final Logger logger = Logger.getLogger(POIExcelManager.class);
     private static final String EXCEL_NAME = "POI.xls";
 
     @Test
@@ -30,9 +32,10 @@ public class POIExcelManager extends AbstractExcelManager {
     @Override
     public void createExcel(String fileName, String sheetName, int size) {
         long start = System.nanoTime();
-        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFWorkbook workbook = null;
         HSSFCell cell = null;
         try {
+            workbook = new HSSFWorkbook();
             FileOutputStream op = new FileOutputStream(fileName);
             HSSFSheet sheet = workbook.createSheet(sheetName);
             HSSFRow row = sheet.createRow(0);
@@ -56,17 +59,15 @@ public class POIExcelManager extends AbstractExcelManager {
                 cell.setCellValue(productions.get(i).getDescription());
             }
             workbook.write(op);
-            System.out.println("Test write "
+            logger.info("Test write "
                     + SIZE
                     + " rows take time:"
                     + (TimeUnit.SECONDS.convert(System.nanoTime() - start,
                     TimeUnit.NANOSECONDS)) + " s ");
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+           logger.error(e);
+        } finally {
+            IOUtils.closeQuietly(workbook);
         }
 
     }
@@ -74,9 +75,10 @@ public class POIExcelManager extends AbstractExcelManager {
     @Override
     public void readExcel(String fileName, String sheetName) {
         int rowNum = 0;
+        FileInputStream fip = null;
         try {
             long start = System.nanoTime();
-            FileInputStream fip = new FileInputStream(fileName);
+            fip = new FileInputStream(fileName);
             String suffix = fileName.substring(fileName.lastIndexOf("."));
             if (".xls".endsWith(suffix)) {
                 HSSFWorkbook workbook = new HSSFWorkbook(fip);
@@ -91,16 +93,17 @@ public class POIExcelManager extends AbstractExcelManager {
                             + " rows data take time :"
                             + TimeUnit.SECONDS.convert(System.nanoTime()
                             - start, TimeUnit.NANOSECONDS) + " s");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
+        }finally {
+            org.apache.commons.io.IOUtils.closeQuietly(fip);
         }
     }
 
     private int praseXLS(HSSFWorkbook workbook) {
         if (workbook == null) {
-            System.out.println("Work book is null ,return !");
+            logger.info("Work book is null ,return !");
+            return;
         }
         HSSFSheet sheet = null;
         HSSFRow row = null;
@@ -108,23 +111,22 @@ public class POIExcelManager extends AbstractExcelManager {
         int i = 0;
         for (; i < workbook.getNumberOfSheets(); i++) {
             sheet = workbook.getSheetAt(i);
-            System.out.println("sheet index:" + i);
+            logger.info("sheet index:" + i);
             for (int j = 0; j < sheet.getPhysicalNumberOfRows(); j++) {
                 row = sheet.getRow(j);
                 for (int k = 0; k < row.getLastCellNum(); k++) {
                     cell = row.getCell(k);
                     switch (cell.getCellType()) {
                         case HSSFCell.CELL_TYPE_BOOLEAN:
-                            System.out.println("value:"
+                            logger.info("value:"
                                     + cell.getBooleanCellValue());
                             break;
                         case HSSFCell.CELL_TYPE_NUMERIC:
-                            System.out.println("value:"
+                            logger.info("value:"
                                     + cell.getNumericCellValue());
                             break;
                         case HSSFCell.CELL_TYPE_STRING:
-                            System.out
-                                    .println("value:" + cell.getStringCellValue());
+                            logger.info("value:" + cell.getStringCellValue());
                             break;
                         default:
                             break;

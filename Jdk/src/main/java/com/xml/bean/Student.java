@@ -1,4 +1,4 @@
-package com.jdk.xml.bean;
+package com.xml.bean;
 
 /**
  * Created with IntelliJ IDEA.
