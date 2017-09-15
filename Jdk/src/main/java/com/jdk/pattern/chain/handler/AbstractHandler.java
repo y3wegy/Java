@@ -2,15 +2,14 @@ package com.jdk.pattern.chain.handler;
 
 import com.jdk.pattern.chain.Levels;
 import com.jdk.pattern.chain.request.AbstractRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created by a549238 on 6/7/2016.
  */
 public abstract class AbstractHandler {
 
-    private static Logger logger = LoggerFactory.getLogger(AbstractHandler.class);
+    private static Logger logger = org.apache.log4j.Logger.getLogger(AbstractHandler.class);
 
     private AbstractHandler nextHandler = null;
 
@@ -19,7 +18,7 @@ public abstract class AbstractHandler {
             this.handeRequest(request);
         } else {
             if (this.nextHandler != null) {
-                logger.info("current handler {} can not handle {}",this.getHandleLevel(),request.getLevel());
+                logger.info(String.format("current handler %s can not handle %s",this.getHandleLevel(),request.getLevel()));
                 this.nextHandler.handle(request);
             } else {
                 logger.info("All handler can not handle this request!");
@@ -28,7 +27,7 @@ public abstract class AbstractHandler {
     }
 
     protected void handeRequest(AbstractRequest request) {
-        logger.info("{} handle {}",getHandleLevel(),request.getContent());
+        logger.info(String.format("%s handle %s",getHandleLevel(),request.getContent()));
     }
 
     public void setNextHandler(AbstractHandler nextHandler) {
