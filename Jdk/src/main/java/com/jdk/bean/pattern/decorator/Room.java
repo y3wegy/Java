@@ -1,4 +1,4 @@
-package com.jdk.pattern.decorator;
+package com.jdk.bean.pattern.decorator;
 
 /**
  * Created by a549238 on 3/24/2016.

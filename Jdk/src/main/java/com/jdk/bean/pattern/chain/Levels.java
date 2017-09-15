@@ -1,4 +1,4 @@
-package com.jdk.pattern.chain;
+package com.jdk.bean.pattern.chain;
 
 /**
  * Created by a549238 on 6/7/2016.

@@ -1,6 +1,6 @@
-package com.jdk.pattern.chain.handler;
+package com.jdk.bean.pattern.chain.handler;
 
-import com.jdk.pattern.chain.Levels;
+import com.jdk.bean.pattern.chain.Levels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
