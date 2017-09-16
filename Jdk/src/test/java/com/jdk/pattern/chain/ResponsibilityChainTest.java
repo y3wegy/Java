@@ -1,13 +1,13 @@
 package com.jdk.pattern.chain;
 
-import com.jdk.bean.pattern.chain.handler.AbstractHandler;
-import com.jdk.bean.pattern.chain.handler.Handler01;
-import com.jdk.bean.pattern.chain.handler.Handler02;
-import com.jdk.bean.pattern.chain.handler.Handler03;
-import com.jdk.bean.pattern.chain.request.AbstractRequest;
-import com.jdk.bean.pattern.chain.request.Request01;
-import com.jdk.bean.pattern.chain.request.Request02;
-import com.jdk.bean.pattern.chain.request.Request03;
+import com.pattern.chain.handler.AbstractHandler;
+import com.pattern.chain.handler.Handler01;
+import com.pattern.chain.handler.Handler02;
+import com.pattern.chain.handler.Handler03;
+import com.pattern.chain.request.AbstractRequest;
+import com.pattern.chain.request.Request01;
+import com.pattern.chain.request.Request02;
+import com.pattern.chain.request.Request03;
 import org.junit.Test;
 
 /**
