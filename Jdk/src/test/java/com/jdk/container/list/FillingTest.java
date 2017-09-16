@@ -1,8 +1,7 @@
 package com.jdk.container.list;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +15,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class FillingTest {
-    public static final Logger logger = LoggerFactory.getLogger(FillingTest.class);
+    public static final Logger logger = Logger.getLogger(FillingTest.class);
     @Test
     public void testFill() {
         List<StringAddress> list = new ArrayList<>(Collections.nCopies(4, new StringAddress("Hello")));
