@@ -1,8 +1,7 @@
 package com.jdk.thread.consume.product;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
  */
 public class WaitProduct implements Product {
 
-    private static final Logger logger = LoggerFactory.getLogger(WaitProduct.class);
+    private static final Logger logger = Logger.getLogger(WaitProduct.class);
 
     private static final int MAX_SIZE = 100;
 

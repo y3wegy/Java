@@ -2,16 +2,14 @@ package com.xml.manager;
 
 import com.xml.XMLException;
 import com.xml.bean.Student;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.apache.log4j.Logger;
 import java.util.List;
 
 /**
  * Created by a549238 on 1/27/2016.
  */
 public class SAXMLManager implements XMLManager {
-    public static final Logger logger = LoggerFactory.getLogger(SAXMLManager.class);
+    public static final Logger logger = Logger.getLogger(SAXMLManager.class);
     private static final String MSG_NO_IMPL = "no implements";
     private String filapath;
 

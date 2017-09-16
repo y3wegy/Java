@@ -1,8 +1,8 @@
 package com.jdk.pattern.decorator;
 
-import com.jdk.bean.pattern.decorator.BlankRoom;
-import com.jdk.bean.pattern.decorator.decorated.FlooredDecorator;
-import com.jdk.bean.pattern.decorator.decorated.PaintedDecorator;
+import com.pattern.decorator.BlankRoom;
+import com.pattern.decorator.decorated.FlooredDecorator;
+import com.pattern.decorator.decorated.PaintedDecorator;
 import org.junit.Test;
 
 /**

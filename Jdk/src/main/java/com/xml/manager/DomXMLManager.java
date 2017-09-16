@@ -2,8 +2,7 @@ package com.xml.manager;
 
 import com.xml.XMLException;
 import com.xml.bean.Student;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +14,10 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ import java.util.List;
  */
 public class DomXMLManager implements XMLManager {
 
-    public static final Logger logger = LoggerFactory.getLogger(DomXMLManager.class);
+    public static final Logger logger = Logger.getLogger(DomXMLManager.class);
     private String filepath;
 
     public DomXMLManager(String filepath) {

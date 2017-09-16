@@ -1,7 +1,6 @@
 package com.jdk.bean.classinfo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * test Class static field method and normal field and method init and load order
@@ -13,7 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AllFather {
 
-    public static final Logger logger = LoggerFactory.getLogger(AllFather.class);
+    public static final Logger logger = Logger.getLogger(AllFather.class);
     private static int staticField = go(22);
 
     static {
