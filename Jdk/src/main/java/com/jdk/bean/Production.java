@@ -1,24 +1,31 @@
 package com.jdk.bean;
 
-import java.io.Serializable;
+import org.apache.commons.lang3.ArrayUtils;
 
-public class Production implements Serializable{
+import java.io.Serializable;
+import java.util.Date;
+
+public class Production implements Serializable {
     private static int staticFiled = 1;
     private int id = 1;
     private String subject;
     private Double price;
     private int count;
     private String description;
+    private Production[] component;
+    private Date lastUpdateDate;
 
     public Production() {
     }
 
-    public Production(int id, String subject, Double price, int count, String description) {
+    public Production(int id, String subject, Double price, int count, String description, Production[] component, Date lastUpdateDate) {
         this.id = id;
         this.subject = subject;
         this.price = price;
         this.count = count;
         this.description = description;
+        this.component = component;
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     public int getId() {
@@ -61,10 +68,31 @@ public class Production implements Serializable{
         this.description = description;
     }
 
+    public Production[] getComponent() {
+        return component;
+    }
+
+    public void setComponent(Production[] component) {
+        this.component = component;
+    }
+
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
     @Override
     public String toString() {
-        return "Production [id=" + id + ", subject=" + subject + ", price="
-                + price + ", count=" + count + ", description=" + description
-                + "]";
+        StringBuilder stringBuilder = new StringBuilder(100);
+        stringBuilder.append("Production [id=").append(id).append(", subject=").append(subject)
+                .append(", price=").append(price).append(", count=").append(count)
+                .append(", description=").append(description).append(", component=").append(ArrayUtils.toString(component))
+                .append(", lastUpdateDate=").append(lastUpdateDate)
+                .append("]");
+        return stringBuilder.toString();
     }
 }

@@ -16,8 +16,8 @@ public class DeserializeObjTest {
     public static final Logger logger = Logger.getLogger(DeserializeObjTest.class);
     public static final String FILE_PATH = DeserializeObjTest.class.getClassLoader().getResource("").getPath()+"out.txt";
 
-    private final Production production = new Production(1,"PC",4999d,2,"Lenovo");
-    private final Production production2 = new Production(2,"PC",5999d,2,"Dell");
+    private final Production production = new Production(1,"PC",4999d,2,"Lenovo",null,null);
+    private final Production production2 = new Production(2,"PC",5999d,2,"Dell",null,null);
 
     @Before
     public void setUp() throws Exception {
