@@ -28,6 +28,8 @@ public class SimpleJacksonTest {
         objectMapper.configure(SerializationFeature.INDENT_OUTPUT,true);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         objectMapper.writeValue(System.out,production);
+        logger.info("\n---------");
+        logger.info(objectMapper.writeValueAsString(production));
     }
 
     /**
