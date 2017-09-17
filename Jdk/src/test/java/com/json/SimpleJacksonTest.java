@@ -3,10 +3,8 @@ package com.json;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonEncoding;
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jdk.bean.Production;
@@ -35,7 +33,7 @@ public class SimpleJacksonTest {
     }
 
     /**
-     * Obj->Json
+     * use ObjectMapper to serialiable Obj
      * @throws Exception
      */
     @Test
@@ -47,7 +45,7 @@ public class SimpleJacksonTest {
     }
 
     /**
-     * create Json field one by one
+     * create Json field one by one ,then deserialiable Json
      */
     @Test
     public void testGenerateJson() throws IOException {
@@ -80,10 +78,25 @@ public class SimpleJacksonTest {
         generator.writeEndObject();
 
         generator.close();
+
         logger.info(String.format("JSON String:%s",stringWriter.toString()));
 
         //convert json to bean;
         Production product = objectMapper.readValue(stringWriter.toString(),Production.class);
         logger.info(String.format("parse json to String:%s",product));
+    }
+
+    @Test
+    public void testParseJsonTree() throws IOException {
+        Production cpu = new Production(2,"CPU",999d,13,"Intel",null,Calendar.getInstance().getTime());
+        Production production = new Production(1,"PC",4999d,12,"Lenovo",new Production[]{cpu}, Calendar.getInstance().getTime());
+        String jsonStr = objectMapper.writeValueAsString(production);
+        JsonNode jsonNode = objectMapper.readTree(jsonStr);
+        JsonNode components = jsonNode.get("component");
+        for (JsonNode node :
+                components) {
+            logger.info(String.format("component name:%s",node.get("subject")));
+
+        }
     }
 }
