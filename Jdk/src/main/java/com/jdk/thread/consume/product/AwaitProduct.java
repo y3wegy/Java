@@ -1,7 +1,6 @@
 package com.jdk.thread.consume.product;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by a549238 on 6/16/2016.
  */
 public class AwaitProduct implements Product {
-    private static final Logger logger = LoggerFactory.getLogger(WaitProduct.class);
+    private static final Logger logger = Logger.getLogger(WaitProduct.class);
 
     private static final int MAX_SIZE = 100;
     private final Lock lock = new ReentrantLock();

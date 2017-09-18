@@ -1,12 +1,14 @@
 package com.jdk.thread.callable;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +19,7 @@ import java.util.concurrent.*;
  */
 public class CallableDemo {
 
-    private static final Logger logger = LoggerFactory.getLogger(CallableDemo.class);
+    private static final Logger logger = Logger.getLogger(CallableDemo.class);
     private static final int POOL_SIZE = 3;
 
     public static void main(String[] args) {

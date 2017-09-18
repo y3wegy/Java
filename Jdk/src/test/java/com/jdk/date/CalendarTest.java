@@ -1,8 +1,7 @@
 package com.jdk.date;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,19 +15,19 @@ import java.util.TimeZone;
  */
 public class CalendarTest {
 
-    public static final Logger logger = LoggerFactory.getLogger(CalendarTest.class);
+    public static final Logger logger = Logger.getLogger(CalendarTest.class);
 
     @Test
     public void testTimeZone() {
         Calendar calendar = Calendar.getInstance();
-        logger.info("Local time zone:{}", calendar.getTimeZone());
+        logger.info(String.format("Local time zone:%s", calendar.getTimeZone()));
 
         logger.info(Arrays.toString(TimeZone.getAvailableIDs()));
         calendar.setTimeZone(TimeZone.getTimeZone("Pacific/Niue"));
-        logger.info("GTM+1 :{}", calendar.get(Calendar.HOUR_OF_DAY));
+        logger.info(String.format("GTM+1 :%s", calendar.get(Calendar.HOUR_OF_DAY)));
 
         calendar.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
-        logger.info("Etc/GMT+12 :{}", calendar.get(Calendar.HOUR_OF_DAY));
+        logger.info(String.format("Etc/GMT+12 :{%s", calendar.get(Calendar.HOUR_OF_DAY)));
 
 
     }

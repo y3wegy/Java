@@ -1,7 +1,6 @@
 package com.jdk.thread.consume.product;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -11,7 +10,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  */
 public class QueueProduct implements Product {
 
-    private static final Logger logger = LoggerFactory.getLogger(QueueProduct.class);
+    private static final Logger logger = Logger.getLogger(QueueProduct.class);
     private static final int MAX_SIZE = 100;
     private LinkedBlockingDeque<Object> queue = new LinkedBlockingDeque<Object>(MAX_SIZE);
 

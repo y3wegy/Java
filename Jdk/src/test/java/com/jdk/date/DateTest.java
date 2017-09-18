@@ -1,9 +1,8 @@
 package com.jdk.date;
 
 import oracle.sql.TIMESTAMP;
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -14,18 +13,16 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by a549238 on 4/27/2015.
- */
 public class DateTest {
-    private static final Logger logger = LoggerFactory.getLogger(DateTest.class);
+    private static final Logger logger = Logger.getLogger(DateTest.class);
+
     @Test
     public void testCalendar2SqlTimestamp() {
         Calendar calendar = Calendar.getInstance();
         Timestamp timestamp = new Timestamp(calendar.getTime().getTime());
         Timestamp timestamp1 = new Timestamp(calendar.getTimeInMillis());
-        logger.info("time and time:{}",timestamp.toString());
-        logger.info("getTimeInMillis:{}", timestamp1.toString());
+        logger.info(String.format("time and time:%s", timestamp));
+        logger.info(String.format("time and time:%s", timestamp1));
         logger.info(Timestamp.valueOf("2015-09-08 12:00:00").toString());
     }
 
@@ -54,13 +51,11 @@ public class DateTest {
     }
 
     @Test
-    public void testOrcaleCase()
-    {
+    public void testOrcaleCase() {
         TIMESTAMP timestamp = new TIMESTAMP(new Timestamp(new Date().getTime()));
-        if(timestamp instanceof TIMESTAMP)
-        {
+        if (timestamp instanceof TIMESTAMP) {
             try {
-                logger.info(((TIMESTAMP)timestamp).timestampValue().toString());
+                logger.info(((TIMESTAMP) timestamp).timestampValue().toString());
             } catch (SQLException e) {
                 e.printStackTrace();
             }

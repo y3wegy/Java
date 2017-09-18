@@ -1,8 +1,7 @@
 package com.jdk.container;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +16,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class ChangeValueTest {
-    public static final Logger logger = LoggerFactory.getLogger(ChangeValueTest.class);
+    public static final Logger logger = Logger.getLogger(ChangeValueTest.class);
     @Test
     public void testMe() {
         ChangeValueTest changeValueTest = new ChangeValueTest();

@@ -1,3 +1,4 @@
+/*
 package com.jdk.thread.future;
 
 import org.junit.After;
@@ -8,9 +9,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
 
+*/
 /**
  * Created by e631876 on 6/8/2017.
- */
+ *//*
+
 public class TaskFactoryTest {
     @Before
     public void setUp() throws Exception {
@@ -32,7 +35,8 @@ public class TaskFactoryTest {
         System.out.println(res.get());
     }
 
-    /**
+    */
+/**
      *      task1
      *      /   \
      *  task2  task3
@@ -40,7 +44,8 @@ public class TaskFactoryTest {
      *      task4
      *
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void testRunNonblocking() throws Exception {
         CompletableFuture<Integer> res = TaskFactory.task1(1).thenCompose(i1 -> (
@@ -50,14 +55,16 @@ public class TaskFactoryTest {
         System.out.println(res.get());
     }
 
-    /**
+    */
+/**
      *      task1
      *      /   \
      *  task2  task3
      *      \   /
      *      task4
      * @throws Exception
-     */
+     *//*
+
     @Test
     public void testRunNonblockingAlt() throws Exception {
         CompletableFuture<Integer> task1 = TaskFactory.task1(1);
@@ -80,4 +87,4 @@ public class TaskFactoryTest {
         BiFunction<Integer, Integer, Integer> sumFunc = (a, b) -> a + b;
         return task2.thenCombine(task3, sumFunc);
     }
-}
+}*/
