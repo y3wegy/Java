@@ -1,11 +1,11 @@
 package com.jdk.thread.consume;
 
-import com.jdk.thread.consume.product.Product;
+import com.jdk.bean.sync.Product;
 
 import java.util.concurrent.Callable;
 
 /**
- * Created by a549238 on 6/15/2016.
+ * Created by Rui on 6/15/2016.
  */
 public class Consumer implements Callable<Boolean> {
 

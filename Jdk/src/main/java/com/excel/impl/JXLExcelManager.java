@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class JXLExcelManager implements IExcel {
-    public static final Logger logger = Logger.getLogger(JXLExcelManager.class);
+    private static final Logger logger = Logger.getLogger(JXLExcelManager.class);
 
     @Override
     public void createExcel(String fileName, String sheetName, int size) {

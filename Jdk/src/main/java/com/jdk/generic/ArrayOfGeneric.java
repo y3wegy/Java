@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/20/13
  * Time: 4:01 PM
  * To change this template use File | Settings | File Templates.

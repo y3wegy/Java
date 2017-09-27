@@ -7,14 +7,14 @@ import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/24/13
  * Time: 4:50 PM
  * To change this template use File | Settings | File Templates.
  */
 public class UnSupportOperationTest {
 
-    public static final Logger logger = Logger.getLogger(UnSupportOperationTest.class);
+    private static final Logger logger = Logger.getLogger(UnSupportOperationTest.class);
     @Test
     public void testModify() {
         List<String> list = Arrays.asList("A B C D E F G H I J K L M N".split(" "));

@@ -1,16 +1,18 @@
 package com.algorithm;
 
+import org.apache.log4j.Logger;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
- * Created by a549238 on 8/20/2015.
+ * Created by Rui on 8/20/2015.
  */
 public class SpaceToTimeSortManager {
-
+    public static final Logger logger = Logger.getLogger(SpaceToTimeSortManager.class);
     private static final int SIZE = 1000000;
-    private int[] arrayValue;
 
     public static void main(String[] args) {
         SpaceToTimeSortManager spaceToTimeSortManager = new SpaceToTimeSortManager();
@@ -22,24 +24,25 @@ public class SpaceToTimeSortManager {
         long start = System.currentTimeMillis();
         Arrays.sort(a);
         long end = System.currentTimeMillis();
-        System.out.println("Array .sort take time :" + (end - start) + " ms ");
+        logger.info("Array .sort take time :" + (end - start) + " ms ");
 
         start = end;
         System.arraycopy(old, 0, a, 0, old.length);  //restore data
 
         spaceToTimeSortManager.spaceToTime(a);
         end = System.currentTimeMillis();
-        System.out.println("Space to Time method take time:" + (end - start) + " ms ");
+        logger.info("Space to Time method take time:" + (end - start) + " ms ");
 
 
     }
 
     public int[] initData() {
         int[] arrayValue = new int[SIZE];
-        Map<Integer, Object> map = new HashMap<Integer, Object>();
+        Map<Integer, Object> map = new HashMap<>();
         int count = 0;
+        Random random = new Random(SIZE*10);
         while (count < arrayValue.length) {
-            int value = (int) (Math.random() * SIZE * 10 + 1);
+            int value = random.nextInt() + 1;
             if (map.get(value) == null) {
                 map.put(value, value);
                 arrayValue[count] = value;

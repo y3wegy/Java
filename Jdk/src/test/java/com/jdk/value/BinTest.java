@@ -5,7 +5,7 @@ import org.junit.Test;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 3/21/13
  * Time: 4:02 PM
  * To change this template use File | Settings | File Templates.

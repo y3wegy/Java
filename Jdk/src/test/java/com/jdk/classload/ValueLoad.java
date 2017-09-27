@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 public class ValueLoad {
-    public static final Logger logger =Logger.getLogger(ValueLoad.class);
+    private static final Logger logger =Logger.getLogger(ValueLoad.class);
     @Test
     public void testValue() {
         //Class<Clazz1> clazz1 =Clazz1.class;

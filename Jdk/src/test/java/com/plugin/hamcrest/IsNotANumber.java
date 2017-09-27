@@ -6,7 +6,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Created by a549238 on 1/24/14.
+ * Created by Rui on 1/24/14.
  */
 public class IsNotANumber extends TypeSafeMatcher {
 

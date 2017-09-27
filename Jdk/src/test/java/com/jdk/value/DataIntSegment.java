@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by a549238 on 3/25/14.
+ * Created by Rui on 3/25/14.
  */
 public class DataIntSegment {
     @Test

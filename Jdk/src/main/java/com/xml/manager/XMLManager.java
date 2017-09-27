@@ -6,7 +6,7 @@ import com.xml.bean.Student;
 import java.util.List;
 
 /**
- * Created by a549238 on 1/27/2016.
+ * Created by Rui on 1/27/2016.
  */
 public interface XMLManager {
 

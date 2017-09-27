@@ -19,10 +19,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by a549238 on 1/27/2016.
+ * Created by Rui on 1/27/2016.
  */
 public class Dom4JXMLManager implements XMLManager {
-    public static final Logger logger = Logger.getLogger(Dom4JXMLManager.class);
+    private static final Logger logger = Logger.getLogger(Dom4JXMLManager.class);
     private String filepath;
 
     public Dom4JXMLManager(String filepath) {

@@ -1,8 +1,5 @@
 package com.jdk.singleton;
 
-import com.jdk.Singleton.InnerClassSingleton;
-import com.jdk.Singleton.Singleton;
-import com.jdk.Singleton.ThreeSingleton;
 import org.junit.Test;
 import org.testng.Assert;
 

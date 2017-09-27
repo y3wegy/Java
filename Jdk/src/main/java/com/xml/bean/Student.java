@@ -2,7 +2,7 @@ package com.xml.bean;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 3/14/13
  * <p/>
  * Time: 9:58 AM

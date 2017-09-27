@@ -2,9 +2,6 @@ package com.jdk.value;
 
 import org.junit.Test;
 
-/**
- * Created by a549238 on 3/18/2016.
- */
 public class ValueTest {
     @Test
     public void testDefaultValue() {

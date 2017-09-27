@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by a549238 on 9/1/2015.
+ * Created by Rui on 9/1/2015.
  */
 public class PrimeTest {
 

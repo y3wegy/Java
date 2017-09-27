@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 /**
  * Excel method
  *
- * @author a549238
+ * @author Rui
  */
 public interface IExcel {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

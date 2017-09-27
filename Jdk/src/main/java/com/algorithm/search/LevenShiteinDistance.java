@@ -1,10 +1,12 @@
 package com.algorithm.search;
 
+import org.apache.log4j.Logger;
+
 /**
- * Created by a549238 on 8/24/2015.
+ * Created by Rui on 8/24/2015.
  */
 public class LevenShiteinDistance {
-
+    public static final Logger logger = Logger.getLogger(LevenShiteinDistance.class);
     private static final String TEXT = "I am a good man,can you help me?";
 
     public static void main(String[] args) {
@@ -13,7 +15,7 @@ public class LevenShiteinDistance {
         int[] v1 = new int[targetText.length() + 1];
         LevenShiteinDistance levenShiteinDistance = new LevenShiteinDistance();
         int distance = levenShiteinDistance.editDistance(TEXT, v0, v1, targetText);
-        System.out.println("TEXT:" + TEXT + "  \ntartgetText:" + targetText + "\nDistance:" + distance);
+        logger.info("TEXT:" + TEXT + "  \ntartgetText:" + targetText + "\nDistance:" + distance);
     }
 
     /**
@@ -24,7 +26,7 @@ public class LevenShiteinDistance {
      * @param v1   int array of length targetText.length() + 1
      * @return distance
      */
-    private int editDistance(String word, int v0[], int v1[], String targetText) {
+    private int editDistance(String word, int[] v0, int[] v1, String targetText) {
         // initialize v0 (prior row of distances) as edit distance for empty 'word'
         for (int i = 0; i < v0.length; i++)
             v0[i] = i;

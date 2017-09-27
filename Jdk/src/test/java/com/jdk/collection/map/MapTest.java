@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * Created by a549238 on 5/25/2015.
+ * Created by Rui on 5/25/2015.
  */
 public class MapTest {
 

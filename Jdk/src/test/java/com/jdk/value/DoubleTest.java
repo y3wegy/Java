@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * Created by a549238 on 1/28/2016.
+ * Created by Rui on 1/28/2016.
  */
 public class DoubleTest {
     @Test

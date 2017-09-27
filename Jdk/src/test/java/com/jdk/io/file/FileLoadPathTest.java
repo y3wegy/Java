@@ -4,10 +4,10 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 /**
- * Created by a549238 on 4/16/2015.
+ * Created by Rui on 4/16/2015.
  */
 public class FileLoadPathTest {
-    public static final Logger logger =Logger.getLogger(FileLoadPathTest.class);
+    private static final Logger logger =Logger.getLogger(FileLoadPathTest.class);
 
     @Test
     public void testLoadResource() {

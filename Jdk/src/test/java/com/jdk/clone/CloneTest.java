@@ -2,7 +2,7 @@ package com.jdk.clone;
 
 import org.junit.Test;
 /**
- * Created by a549238 on 8/12/2015.
+ * Created by Rui on 8/12/2015.
  */
 public class CloneTest {
     @Test

@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 /**
- * Created by a549238 on 1/27/2016.
+ * Created by Rui on 1/27/2016.
  */
 public class SAXMLManager implements XMLManager {
-    public static final Logger logger = Logger.getLogger(SAXMLManager.class);
+    private static final Logger logger = Logger.getLogger(SAXMLManager.class);
     private static final String MSG_NO_IMPL = "no implements";
     private String filapath;
 

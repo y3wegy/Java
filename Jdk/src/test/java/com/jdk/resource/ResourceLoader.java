@@ -8,7 +8,7 @@ import java.security.CodeSource;
 import java.security.ProtectionDomain;
 
 /**
- * Created by a549238 on 6/29/2015.
+ * Created by Rui on 6/29/2015.
  */
 public class ResourceLoader {
 

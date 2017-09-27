@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/4/13
  * Time: 2:53 PM
  * To change this template use File | Settings | File Templates.

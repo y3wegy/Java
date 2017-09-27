@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SimpleJacksonTest {
-    public static final Logger logger = Logger.getLogger(SimpleJacksonTest.class);
+    private static final Logger logger = Logger.getLogger(SimpleJacksonTest.class);
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS XX");
 
     private static ObjectMapper objectMapper = null;

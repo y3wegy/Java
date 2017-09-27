@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by a549238 on 1/22/14.
+ * Created by Rui on 1/22/14.
  */
 public class SimpleBean {
     public int add(int a, int b) {
@@ -28,7 +28,7 @@ public class SimpleBean {
     }
 
     public Map<String, String> getMap(String key, String value) {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(key, value);
         return map;
     }

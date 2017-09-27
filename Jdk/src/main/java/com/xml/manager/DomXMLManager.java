@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by a549238 on 1/27/2016.
+ * Created by Rui on 1/27/2016.
  */
 public class DomXMLManager implements XMLManager {
 
-    public static final Logger logger = Logger.getLogger(DomXMLManager.class);
+    private static final Logger logger = Logger.getLogger(DomXMLManager.class);
     private String filepath;
 
     public DomXMLManager(String filepath) {

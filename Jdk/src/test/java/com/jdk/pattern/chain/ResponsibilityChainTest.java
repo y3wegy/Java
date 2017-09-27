@@ -11,7 +11,7 @@ import com.pattern.chain.request.Request03;
 import org.junit.Test;
 
 /**
- * Created by a549238 on 6/7/2016.
+ * Created by Rui on 6/7/2016.
  */
 public class ResponsibilityChainTest {
     @Test

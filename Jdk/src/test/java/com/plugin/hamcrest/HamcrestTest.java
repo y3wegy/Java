@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by a549238 on 1/22/14.
+ * Created by Rui on 1/22/14.
  */
 public class HamcrestTest {
     @Test

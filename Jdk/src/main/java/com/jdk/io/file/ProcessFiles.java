@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class ProcessFiles {
-    public static final Logger logger = Logger.getLogger(ProcessFiles.class);
+    private static final Logger logger = Logger.getLogger(ProcessFiles.class);
 
     private final Strategy strategy;
     private final String ext;
@@ -32,7 +32,7 @@ public class ProcessFiles {
                     }
                 }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 

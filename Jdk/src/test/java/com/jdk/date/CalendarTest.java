@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Created by a549238 on 10/9/2015.
+ * Created by Rui on 10/9/2015.
  */
 public class CalendarTest {
 
-    public static final Logger logger = Logger.getLogger(CalendarTest.class);
+    private static final Logger logger = Logger.getLogger(CalendarTest.class);
 
     @Test
     public void testTimeZone() {

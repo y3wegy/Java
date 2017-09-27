@@ -2,7 +2,7 @@ package com.jdk.generic.bound;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/23/13
  * Time: 5:17 PM
  * To change this template use File | Settings | File Templates.
@@ -46,10 +46,10 @@ class SelfBounding {
         A a = new A();
         a.set(new A());
         a = a.set(new A()).get();
-        a = a.get();
+        a.get();
 
         C c = new C();
-        c = c.setAndGet(new C());
+        c.setAndGet(new C());
 
     }
 }

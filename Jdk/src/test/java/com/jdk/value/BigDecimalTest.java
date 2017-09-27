@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * Created by a549238 on 6/8/2016.
+ * Created by Rui on 6/8/2016.
  */
 public class BigDecimalTest {
     @Test

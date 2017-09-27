@@ -9,7 +9,7 @@ import org.junit.Test;
  *
  */
 public class CLassMethodTest {
-    public static final Logger logger = Logger.getLogger(CLassMethodTest.class);
+    private static final Logger logger = Logger.getLogger(CLassMethodTest.class);
 
     /**
      * test some method of Class about class name

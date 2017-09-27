@@ -13,7 +13,7 @@ import org.junit.Test;
  * Created by e631876 on 9/11/2017.
  */
 public class ClassLoadTest {
-    public static final Logger logger = Logger.getLogger(ClassLoadTest.class);
+    private static final Logger logger = Logger.getLogger(ClassLoadTest.class);
 
     /**
      * test Class static field method and normal field and method init and load order

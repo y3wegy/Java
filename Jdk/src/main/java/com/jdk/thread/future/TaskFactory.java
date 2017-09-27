@@ -6,6 +6,9 @@ import java.util.concurrent.CompletableFuture;
  * Created by e631876 on 6/8/2017.
  */
 public class TaskFactory {
+    private TaskFactory() {
+    }
+
     public static CompletableFuture<Integer> task1(int input) {
         return TimedEventSupport.delayedSuccess(1, input + 1);
     }

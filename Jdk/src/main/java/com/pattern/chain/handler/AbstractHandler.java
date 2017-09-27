@@ -5,7 +5,7 @@ import com.pattern.chain.request.AbstractRequest;
 import org.apache.log4j.Logger;
 
 /**
- * Created by a549238 on 6/7/2016.
+ * Created by Rui on 6/7/2016.
  */
 public abstract class AbstractHandler {
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class HeapStackTest {
-    public static final Logger logger = Logger.getLogger(HeapStackTest.class);
+    private static final Logger logger = Logger.getLogger(HeapStackTest.class);
 
     private static int a = 10;
 

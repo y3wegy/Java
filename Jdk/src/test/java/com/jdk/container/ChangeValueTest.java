@@ -10,13 +10,13 @@ import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 6/25/13
  * Time: 2:11 PM
  * To change this template use File | Settings | File Templates.
  */
 public class ChangeValueTest {
-    public static final Logger logger = Logger.getLogger(ChangeValueTest.class);
+    private static final Logger logger = Logger.getLogger(ChangeValueTest.class);
     @Test
     public void testMe() {
         ChangeValueTest changeValueTest = new ChangeValueTest();

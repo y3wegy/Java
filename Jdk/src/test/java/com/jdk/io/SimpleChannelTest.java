@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class SimpleChannelTest {
-    public static final Logger logger = Logger.getLogger(SimpleChannelTest.class);
+    private static final Logger logger = Logger.getLogger(SimpleChannelTest.class);
     private static final int BUFF_SIZE = 1024;
     private static final String DATA_PATH = SimpleChannelTest.class.getClassLoader().getResource(".").getPath() + "data.txt";
     private static final String FILE_PATH = SimpleChannelTest.class.getClassLoader().getResource(".").getPath() + "out.txt";

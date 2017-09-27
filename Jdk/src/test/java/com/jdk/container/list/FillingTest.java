@@ -9,13 +9,13 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/24/13
  * Time: 2:43 PM
  * To change this template use File | Settings | File Templates.
  */
 public class FillingTest {
-    public static final Logger logger = Logger.getLogger(FillingTest.class);
+    private static final Logger logger = Logger.getLogger(FillingTest.class);
     @Test
     public void testFill() {
         List<StringAddress> list = new ArrayList<>(Collections.nCopies(4, new StringAddress("Hello")));

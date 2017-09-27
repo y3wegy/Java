@@ -1,44 +1,39 @@
 package com.algorithm;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.log4j.Logger;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class ShortUrl {
 
-    public ShortUrl() {
-        // TODO Auto-generated constructor stub
-    }
-
+    private static final Logger logger = Logger.getLogger(ShortUrl.class);
+    final String[] dic = new String[]{"a", "b", "c", "d", "e", "f",
+            "g", "h", "i", "field", "k", "l", "m", "n", "o", "p", "q", "r",
+            "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3",
+            "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F",
+            "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+            "S", "T", "U", "V", "W", "X", "Y", "Z"};
     /**
      * @param args
      */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+    public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         ShortUrl su = new ShortUrl();
-        System.out.println(su.generate("http://sports.sina.com.cn/nba"));
+        logger.info(su.generate("http://sports.sina.com.cn/nba"));
     }
 
-    public String generate(String keyword) {
-        final String[] CHARS_DIC = new String[]{"a", "b", "c", "d", "e", "f",
-                "g", "h", "i", "field", "k", "l", "m", "n", "o", "p", "q", "r",
-                "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3",
-                "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F",
-                "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-                "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    public String generate(String keyword) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
-        // final String keyword = "http://sports.sina.com.cn/nba";
-        byte[] encryptedTextBytes = null;
 
-        try {
-            MessageDigest md5Digest = MessageDigest.getInstance("MD5");
-            md5Digest.reset();
-            md5Digest.update(keyword.getBytes("UTF-8"));
-            encryptedTextBytes = md5Digest.digest();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+
+        MessageDigest md5Digest = MessageDigest.getInstance("MD5");
+        md5Digest.reset();
+        md5Digest.update(keyword.getBytes("UTF-8"));
+        byte[] encryptedTextBytes = md5Digest.digest();
+        if(ArrayUtils.isEmpty(encryptedTextBytes)){
+            return null;
         }
 
         StringBuilder result = new StringBuilder();
@@ -50,8 +45,8 @@ public class ShortUrl {
             hex1 = hex1.length() == 1 ? "0" + hex1 : hex1;
             hex2 = hex2.length() == 1 ? "0" + hex2 : hex2;
             int index = (int) Long.parseLong(hex1 + hex2, 16)
-                    % CHARS_DIC.length;
-            result.append(CHARS_DIC[index]);
+                    % dic.length;
+            result.append(dic[index]);
         }
 
         return result.toString();

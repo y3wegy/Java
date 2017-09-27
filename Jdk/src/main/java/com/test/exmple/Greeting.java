@@ -1,15 +1,17 @@
 package com.test.exmple;
 
+import org.apache.log4j.Logger;
+
 /**
- * Created by a549238 on 1/24/14.
+ * Created by Rui on 1/24/14.
  */
 public class Greeting {
-
+    public static final Logger logger = Logger.getLogger(Greeting.class);
     public void coveredByUnitTest() {
-        System.out.println("<UnitTest> Hello, world.");
+        logger.info("<UnitTest> Hello, world.");
     }
 
     public void coveredByIntegrationTest() {
-        System.out.println("<IntegrationTest> Hello, world.");
+        logger.info("<IntegrationTest> Hello, world.");
     }
 }

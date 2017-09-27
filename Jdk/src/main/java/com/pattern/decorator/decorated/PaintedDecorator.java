@@ -4,7 +4,7 @@ import com.pattern.decorator.Room;
 import com.pattern.decorator.RoomDecorator;
 
 /**
- * Created by a549238 on 3/24/2016.
+ * Created by Rui on 3/24/2016.
  */
 public class PaintedDecorator extends RoomDecorator {
     public PaintedDecorator(Room roomToBeDecorated) {

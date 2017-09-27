@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by a549238 on 6/7/2016.
+ * Created by Rui on 6/7/2016.
  */
 public class DBTest {
 

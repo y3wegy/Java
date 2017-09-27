@@ -9,7 +9,7 @@ import java.io.File;
  * Created by e631876 on 9/14/2017.
  */
 public class DirLoopTest {
-    public static final Logger logger = Logger.getLogger(DirLoopTest.class);
+    private static final Logger logger = Logger.getLogger(DirLoopTest.class);
 
     @Test
     public void testLoopDir() throws Exception {

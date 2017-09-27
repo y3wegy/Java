@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.math.BigInteger;
 
 /**
- * Created by a549238 on 3/18/2016.
+ * Created by Rui on 3/18/2016.
  */
 public class BigIntegerTest {
     @Test

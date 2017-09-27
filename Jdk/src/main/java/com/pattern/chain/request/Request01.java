@@ -3,7 +3,7 @@ package com.pattern.chain.request;
 import com.pattern.chain.Levels;
 
 /**
- * Created by a549238 on 6/7/2016.
+ * Created by Rui on 6/7/2016.
  */
 public class Request01 extends AbstractRequest {
 

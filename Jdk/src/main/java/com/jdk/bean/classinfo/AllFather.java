@@ -5,14 +5,13 @@ import org.apache.log4j.Logger;
 /**
  * test Class static field method and normal field and method init and load order
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 3/21/13
  * Time: 2:05 PM
  * To change this template use File | Settings | File Templates.
  */
 public class AllFather {
-
-    public static final Logger logger = Logger.getLogger(AllFather.class);
+    private static final Logger logger = Logger.getLogger(AllFather.class);
     private static int staticField = go(22);
 
     static {

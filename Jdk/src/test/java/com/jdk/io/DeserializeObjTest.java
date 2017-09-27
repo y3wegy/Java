@@ -13,7 +13,7 @@ import java.io.*;
  */
 
 public class DeserializeObjTest {
-    public static final Logger logger = Logger.getLogger(DeserializeObjTest.class);
+    private static final Logger logger = Logger.getLogger(DeserializeObjTest.class);
     public static final String FILE_PATH = DeserializeObjTest.class.getClassLoader().getResource("").getPath()+"out.txt";
 
     private final Production production = new Production(1,"PC",4999d,2,"Lenovo",null,null);

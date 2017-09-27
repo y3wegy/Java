@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
- * Created by a549238 on 4/16/2015.
+ * Created by Rui on 4/16/2015.
  */
 public class FileMethodTest {
-    public static final Logger logger = Logger.getLogger(FileMethodTest.class);
+    private static final Logger logger = Logger.getLogger(FileMethodTest.class);
 
     /**
      * class File some constant attr

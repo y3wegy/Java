@@ -13,7 +13,7 @@ import java.util.Scanner;
  * change this template use File | Settings | File Templates.
  */
 public class SimpleIOTest {
-    public static final Logger logger = Logger.getLogger(SimpleIOTest.class);
+    private static final Logger logger = Logger.getLogger(SimpleIOTest.class);
 
     private static final String FILE_PATH = SimpleIOTest.class.getClassLoader().getResource("data.txt").getPath();
     private static final String OUT_PATH = IORedirectingTest.class.getClassLoader().getResource("out.txt").getFile();

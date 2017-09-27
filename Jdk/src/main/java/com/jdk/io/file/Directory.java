@@ -9,12 +9,16 @@ import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
- * User: a549238
+ * User: Rui
  * Date: 12/3/13
  * Time: 5:58 PM
  * To change this template use File | Settings | File Templates.
  */
 public final class Directory {
+    private Directory() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static File[] local(File dir, final String regex) {
         return dir.listFiles(new FilenameFilter() {
             private Pattern pattern = Pattern.compile(regex);
@@ -59,8 +63,8 @@ public final class Directory {
     }
 
     public static class TreeInfo implements Iterable<File> {
-        public List<File> files = new ArrayList<File>();
-        public List<File> dirs = new ArrayList<File>();
+        public List<File> files = new ArrayList<>();
+        public List<File> dirs = new ArrayList<>();
 
         @Override
         public Iterator<File> iterator() {

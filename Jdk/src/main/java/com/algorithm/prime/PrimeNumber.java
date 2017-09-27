@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by a549238 on 9/1/2015.
+ * Created by Rui on 9/1/2015.
  */
 public class PrimeNumber {
     private Integer number;
@@ -18,7 +18,7 @@ public class PrimeNumber {
     }
 
     public Set<Integer> getFactors() {
-        Set<Integer> factors = new HashSet<Integer>();
+        Set<Integer> factors = new HashSet<>();
         factors.add(1);
         factors.add(number);
         for (Integer i = 2; i < number; i++) {

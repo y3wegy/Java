@@ -8,10 +8,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * concurrentHashmap set and put method is sy
- * Created by a549238 on 7/1/2016.
+ * Created by Rui on 7/1/2016.
  */
 public class ConcurrentHashMapTest {
-    public static final Logger logger = Logger.getLogger(ConcurrentHashMapTest.class);
+    private static final Logger logger = Logger.getLogger(ConcurrentHashMapTest.class);
     @Test
     public void testSynarizhed() throws InterruptedException {
         Map<String, String> map = new ConcurrentHashMap<>(100,0.75f,6);

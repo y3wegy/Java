@@ -1,8 +1,8 @@
 package com.excel.impl;
 
 import com.excel.IExcel;
-import com.jdk.bean.Production;
 import com.excel.factory.ProductionFactory;
+import com.jdk.bean.Production;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -12,7 +12,6 @@ import org.apache.poi.util.IOUtils;
 import org.junit.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class POIExcelManager implements IExcel {
-    public static final Logger logger = Logger.getLogger(POIExcelManager.class);
+    private static final Logger logger = Logger.getLogger(POIExcelManager.class);
     private static final String EXCEL_NAME = "POI.xls";
 
     @Test
@@ -79,14 +78,12 @@ public class POIExcelManager implements IExcel {
         try {
             long start = System.nanoTime();
             fip = new FileInputStream(fileName);
-            String suffix = fileName.substring(fileName.lastIndexOf("."));
+            String suffix = fileName.substring(fileName.lastIndexOf('.'));
             if (".xls".endsWith(suffix)) {
                 HSSFWorkbook workbook = new HSSFWorkbook(fip);
                 rowNum = praseXLS(workbook);
             }
-            fip.close();
-            System.out
-                    .println("now:"
+            logger.info("now:"
                             + dateFormat.format(new Date())
                             + ",read "
                             + rowNum
@@ -96,7 +93,8 @@ public class POIExcelManager implements IExcel {
         } catch (IOException e) {
             logger.error(e);
         }finally {
-            org.apache.commons.io.IOUtils.closeQuietly(fip);
+            IOUtils.closeQuietly(fip);
+            IOUtils.closeQuietly(fip);
         }
     }
 

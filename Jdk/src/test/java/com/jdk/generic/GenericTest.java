@@ -14,7 +14,7 @@ import java.util.List;
  * Created by e631876 on 9/11/2017.
  */
 public class GenericTest {
-    public static final Logger logger = Logger.getLogger(GenericTest.class);
+    private static final Logger logger = Logger.getLogger(GenericTest.class);
 
     @Test
     public void testGenericMethod() throws Exception {
