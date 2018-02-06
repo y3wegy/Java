@@ -1,9 +1,9 @@
 package com.jdk.io;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;

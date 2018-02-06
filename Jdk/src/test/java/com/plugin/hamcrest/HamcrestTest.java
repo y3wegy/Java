@@ -1,6 +1,6 @@
 package com.plugin.hamcrest;
 
-import com.test.module.SimpleBean;
+import com.module.SimpleBean;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -4,7 +4,7 @@ package com.algorithm;
  * Created by Rui on 5/25/2015.
  */
 public class SortManager {
-    private SortManager() {
+    public SortManager() {
     }
 
     public static int[] bubbleSort(int[] values) {

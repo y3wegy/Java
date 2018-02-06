@@ -70,7 +70,7 @@ public class TaskChainTest {
         System.out.println(res.get());
     }
 
-    @Test
+    @Test(expected=ExecutionException.class)
     public void testRunNonblockingAltFailed() throws Exception {
         CompletableFuture<Integer> task1 = TaskFactory.task1(1);
         CompletableFuture<Integer> comp123 = task1.thenCompose(i1 -> runSameTime(i1));

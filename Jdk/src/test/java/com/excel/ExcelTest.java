@@ -8,8 +8,8 @@ import org.junit.Test;
  * Created by e631876 on 9/11/2017.
  */
 public class ExcelTest {
-    private static final String JXL_EXCEL_NAME = "jxl.xls";
-    private static final String POI_EXCEL_NAME = "POI.xls";
+    private static final String JXL_EXCEL_NAME = ExcelTest.class.getClassLoader().getResource("").getPath()+"jxl.xls";
+    private static final String POI_EXCEL_NAME = ExcelTest.class.getClassLoader().getResource("").getPath()+"POI.xls";
     @Test
     public void testJXL() throws Exception {
         IExcel excelManager  = new JXLExcelManager();

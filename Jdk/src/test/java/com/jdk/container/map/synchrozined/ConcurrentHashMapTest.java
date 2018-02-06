@@ -17,7 +17,7 @@ public class ConcurrentHashMapTest {
         Map<String, String> map = new ConcurrentHashMap<>(100,0.75f,6);
         map.put("key","1");
         String value = map.get("key");
-        logger.info(String.format("before operate,value:%s"+value));
+        logger.info(String.format("before operate,value:%s",value));
         new Thread(new TestThread(map)).start();
         new Thread(new TestThread(map)).start();
 

@@ -56,7 +56,7 @@ public class XmlTest {
         xmlDom4JManager.delByName("y3wegy2");
     }
 
-    @Test
+    @Test(expected = XMLException.class)
     public void testSAX() throws Exception {
         XMLManager xmlSAXManalger = new SAXMLManager(filepath);
         XMLManager dom4jManager = new Dom4JXMLManager(filepath);

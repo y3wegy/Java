@@ -9,7 +9,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.util.IOUtils;
-import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,12 +20,6 @@ import java.util.concurrent.TimeUnit;
 public class POIExcelManager implements IExcel {
     private static final Logger logger = Logger.getLogger(POIExcelManager.class);
     private static final String EXCEL_NAME = "POI.xls";
-
-    @Test
-    public void testExcel() {
-        createExcel(EXCEL_NAME, "POI_TEST", SIZE);
-        readExcel(EXCEL_NAME, "POI_TEST");
-    }
 
     @Override
     public void createExcel(String fileName, String sheetName, int size) {

@@ -1,7 +1,8 @@
 package com.jdk.thread.sync;
 
-import com.jdk.thread.sync.MixSynchronize;
 import org.junit.Test;
+
+import static com.jdk.thread.sync.MixSynchronize.synchronizedStaticMethod;
 
 /**
  * http://webcache.googleusercontent.com/search?q=cache:xwKoVgNOnRYJ:www.cnblogs.com/GnagWang/archive/2011/02/27/1966606.html+&cd=1&hl=en&ct=clnk&gl=us
@@ -108,7 +109,11 @@ public class MixSynchronizedTest {
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                MixSynchronize.synchronizedStaticMethod();
+                try {
+                    synchronizedStaticMethod();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }, "T2");
         t1.start();
