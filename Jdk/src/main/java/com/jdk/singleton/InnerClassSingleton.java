@@ -8,19 +8,39 @@ import org.apache.log4j.Logger;
  * http://www.ibm.com/developerworks/cn/java/j-lo-Singleton/
  */
 public class InnerClassSingleton {
-    public static final Logger logger = Logger.getLogger(InnerClassSingleton.class);
-    private InnerClassSingleton() {
-        logger.info("InnerClassSingleton create");
-    }
+	public static final Logger logger = Logger.getLogger(InnerClassSingleton.class);
 
-    public static InnerClassSingleton getInstance() {
-        return SingletonHolder.instance;
-    }
+	private InnerClassSingleton() {
+		super();
+		logger.info("InnerClassSingleton create");
+	}
 
-    //use static inner class to avoid synchronized
-    private static class SingletonHolder {
-        private SingletonHolder() {
-        }
-        private static InnerClassSingleton instance = new InnerClassSingleton();
-    }
+	static {
+		logger.info("InnerClassSingleton ...");
+	}
+
+	private static final int a = getA();
+
+	private static int getA() {
+		logger.info("getA");
+		return 1;
+	}
+
+	public static InnerClassSingleton getInstance() {
+		return SingletonHolder.instance;
+	}
+
+	//use static inner class to avoid synchronized
+	private static class SingletonHolder {
+		private SingletonHolder() {
+			super();
+			logger.info("SingletonHolder create");
+		}
+
+		private static InnerClassSingleton instance = new InnerClassSingleton();
+
+		static {
+			logger.info("SingletonHolder ..");
+		}
+	}
 }

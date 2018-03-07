@@ -1,7 +1,5 @@
-package com.jdk.classload;
+package com.jdk.jvm.classloader;
 
-import com.jdk.bean.classinfo.AllChild;
-import com.jdk.bean.classinfo.AllFather;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -15,22 +13,11 @@ public class CLassMethodTest {
      * test some method of Class about class name
      */
     @Test
-    public void testFatherClassName() {
-        AllFather father = new AllChild();
-        logger.info(father.getClass().getCanonicalName());
-        logger.info(father.getClass().getName());
-        logger.info(father.getClass().getSimpleName());
-    }
-
-    /**
-     * test some method of Class about class name
-     */
-    @Test
-    public void testChildClassName() {
-        AllChild child = new AllChild();
-        logger.info(child.getClass().getCanonicalName());
-        logger.info(child.getClass().getName());
-        logger.info(child.getClass().getSimpleName());
+    public void testClassName() {
+        TestClass testClass = new TestClass();
+        logger.info(testClass.getClass().getCanonicalName());
+        logger.info(testClass.getClass().getName());
+        logger.info(testClass.getClass().getSimpleName());
     }
 
     /**

@@ -11,16 +11,21 @@ import org.apache.log4j.Logger;
  */
 public class AllChild extends AllFather {
     private static final Logger logger = Logger.getLogger(AllFather.class);
-    private static int childStaticField = nn(1);
-    private int childField = nn(2);
+    private static int childStaticField = go(1);
+    private int childField = go(2);
+
+    static {
+        logger.info("This is run in AllChild static !");
+    }
 
     public AllChild() {
+        super();
         logger.info("This is run in  AllChild constructor method!");
         logger.info("childStaticField=" + childStaticField + ";childField=" + childField);
     }
 
-    public static int nn(int x) {
-        logger.info("This is run in AllChild.nn() ;x=" + x);
+    public static int go(int x) {
+        logger.info("This is run in AllChild.go() ;x=" + x);
         return x;
     }
 }

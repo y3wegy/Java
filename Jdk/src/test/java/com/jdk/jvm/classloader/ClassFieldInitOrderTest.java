@@ -1,19 +1,21 @@
-package com.jdk.classload;
+package com.jdk.jvm.classloader;
 
-import com.jdk.bean.Production;
 import com.jdk.bean.classinfo.AllChild;
 import com.jdk.bean.classinfo.AllFather;
 import com.jdk.bean.classinfo.singleton.NoStaticSingleton;
 import com.jdk.bean.classinfo.singleton.StaiticSingleton;
 import org.apache.log4j.Logger;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**
- * Created by e631876 on 9/11/2017.
+ * 
+ * @author e631876
+ * @date 02/28/2018
+ * @description test class field init order
  */
-public class ClassLoadTest {
-    private static final Logger logger = Logger.getLogger(ClassLoadTest.class);
+public class ClassFieldInitOrderTest {
+    private static final Logger logger = Logger.getLogger(ClassFieldInitOrderTest.class);
 
     /**
      * test Class static field method and normal field and method init and load order
@@ -24,6 +26,7 @@ public class ClassLoadTest {
     public void testClassLoadOrder() throws Exception {
         logger.info("testClassLoadOrder");
         AllFather allFather = new AllChild();
+        allFather.getC();
     }
 
     /**
@@ -41,22 +44,18 @@ public class ClassLoadTest {
      */
     @Test
     public void testNoStaticInit() {
-        NoStaticSingleton mysingleton = NoStaticSingleton.GetInstence();
-        logger.info(mysingleton.a);
-        logger.info(mysingleton.b);
+        NoStaticSingleton mySingleton = NoStaticSingleton.GetInstence();
+        logger.info(mySingleton.a);
+        logger.info(mySingleton.b);
     }
 
     @Test
     public void testClassForNameWithoutinit() throws Exception {
         try {
-            Class<Production> clazz = (Class<Production>) Class.forName("com.jdk.bean.Production", false, ClassLoadTest.class.getClassLoader());    //load but not init
-            logger.info("Before Init,Production.staticField still 0");
-            Production calledClass2 = clazz.newInstance();
-            logger.info("After Init");
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Class<AllFather> clazz = (Class<AllFather>) Class.forName("com.jdk.bean.classinfo.AllFather", false, ClassFieldInitOrderTest.class.getClassLoader());    //load but not init
+            logger.info("Before Init,all static and normal field will not init");
+            clazz.newInstance();
+            logger.info("init completed");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -64,12 +63,12 @@ public class ClassLoadTest {
 
     @Test
     public void testClassForNameWithInit() throws Exception {
-        Class<?> clazz = null; // load and init
+        Class<AllFather> clazz = null; // load and init
         try {
-            clazz = Class.forName("com.jdk.bean.Production");
-            logger.info("Before Init,Production.staticField has value 1");
-            Production calledClass = (Production) clazz.newInstance();
-            logger.info("After Init");
+            clazz = (Class<AllFather>) Class.forName("com.jdk.bean.classinfo.AllFather");
+            logger.info("Before Init,static field will init.");
+            clazz.newInstance();
+            logger.info("init completed");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {

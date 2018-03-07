@@ -12,15 +12,23 @@ import org.apache.log4j.Logger;
  */
 public class AllFather {
     private static final Logger logger = Logger.getLogger(AllFather.class);
-    private static int staticField = go(22);
+    private static int staticField = go(11);
 
-    static {
-        logger.info("This is run in  static !");
+    protected int c = getC();
+
+    public int getC() {
+        logger.info("run in AllFather getC");
+        return staticField+c;
     }
 
-    protected int field = go(11);
+    static {
+        logger.info("This is run in AllFather static !");
+    }
+
+    protected int field = go(22);
 
     public AllFather() {
+        super();
         logger.info("This is run in  AllFather constructor method!");
         logger.info("staticField=" + staticField + ";field=" + field);
         field = 39;
