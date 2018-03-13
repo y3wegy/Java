@@ -26,7 +26,7 @@ public class ClassFieldInitOrderTest {
     public void testClassLoadOrder() throws Exception {
         logger.info("testClassLoadOrder");
         AllFather allFather = new AllChild();
-        allFather.getC();
+        allFather.get();
     }
 
     /**

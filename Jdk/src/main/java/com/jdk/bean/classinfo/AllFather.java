@@ -14,11 +14,16 @@ public class AllFather {
     private static final Logger logger = Logger.getLogger(AllFather.class);
     private static int staticField = go(11);
 
-    protected int c = getC();
+    protected int c = get();
 
     public int getC() {
         logger.info("run in AllFather getC");
-        return staticField+c;
+        return staticField+1;
+    }
+
+    public int get() {
+        logger.info("run in AllFather get");
+        return staticField+1;
     }
 
     static {

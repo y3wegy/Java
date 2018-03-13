@@ -56,8 +56,8 @@ public class ValueLoad {
 
 class Clazz1 {
     private static final Logger logger = Logger.getLogger(Clazz1.class);
-    public static final int staticFinalValue = 1;
     public static int staticValue = 5;
+    public static final int staticFinalValue = 1;
 
     static {
         logger.info("init Clazz1 completed");
@@ -66,12 +66,14 @@ class Clazz1 {
 
 class Clazz2 {
     private static final Logger logger = Logger.getLogger(Clazz2.class);
-    public static int staticValue = get(4);
-    public static final int staticFinalValue = staticValue + 1;
 
     static {
         logger.info("init class2 completed!");
     }
+
+    public static int staticValue = get(4);
+    public static final int staticFinalValue = staticValue + 1;
+
 
     public Clazz2() {
         logger.info("staticFinalValue:" + staticValue);
