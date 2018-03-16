@@ -1,7 +1,7 @@
 package jdk.bean;
 
 /**
- * @author e631876
+ * @author Chen,Rui
  * @create 1/18/2018
  * @description
  **/
