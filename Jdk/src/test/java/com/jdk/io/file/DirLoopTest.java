@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.io.File;
 
 /**
- * Created by e631876 on 9/14/2017.
+ * Created by Chen,Rui on 9/14/2017.
  */
 public class DirLoopTest {
     private static final Logger logger = Logger.getLogger(DirLoopTest.class);

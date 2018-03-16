@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by e631876 on 9/11/2017.
+ * Created by Chen,Rui on 9/11/2017.
  */
 public class GenericTest {
     private static final Logger logger = Logger.getLogger(GenericTest.class);

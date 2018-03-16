@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
- * @author e631876
+ * @author Chen,Rui
  * @create 2/24/2018
  * @description loadClass() java.lang.ClassNotFoundException
  * defineClass() java.lang.NoClassDefFoundError
@@ -22,8 +22,8 @@ public class DiffLoaderTest {
 
     @Test
     void testDiff() throws MalformedURLException {
-        URLClassLoader classLoaderA = new URLClassLoader(new URL[]{new URL("file:C:\\Users\\e631876\\Desktop\\Jdk8-1.0-SNAPSHOT.jar")});
-        URLClassLoader classLoaderB = new URLClassLoader(new URL[]{new URL("file:C:\\Users\\e631876\\Desktop\\Jdk8-1.0-SNAPSHOT.jar")});
+        URLClassLoader classLoaderA = new URLClassLoader(new URL[]{new URL("file:C:\\Users\\Chen,Rui\\Desktop\\Jdk8-1.0-SNAPSHOT.jar")});
+        URLClassLoader classLoaderB = new URLClassLoader(new URL[]{new URL("file:C:\\Users\\Chen,Rui\\Desktop\\Jdk8-1.0-SNAPSHOT.jar")});
 
         String className = "jdk.bean.Sample";
 

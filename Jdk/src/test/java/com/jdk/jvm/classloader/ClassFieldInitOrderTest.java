@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * 
- * @author e631876
+ * @author Chen,Rui
  * @date 02/28/2018
  * @description test class field init order
  */

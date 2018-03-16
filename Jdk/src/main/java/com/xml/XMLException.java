@@ -1,7 +1,7 @@
 package com.xml;
 
 /**
- * Created by e631876 on 9/11/2017.
+ * Created by Chen,Rui on 9/11/2017.
  */
 public class XMLException extends Exception {
     public XMLException(String msg){

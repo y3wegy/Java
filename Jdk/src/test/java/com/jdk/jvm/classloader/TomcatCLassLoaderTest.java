@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author e631876
+ * @author Chen,Rui
  * @create 2/27/2018
  * @description  this junit just for record some notes
  *

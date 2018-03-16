@@ -5,7 +5,7 @@ import com.excel.impl.POIExcelManager;
 import org.junit.Test;
 
 /**
- * Created by e631876 on 9/11/2017.
+ * Created by Chen,Rui on 9/11/2017.
  */
 public class ExcelTest {
     private static final String JXL_EXCEL_NAME = ExcelTest.class.getClassLoader().getResource("").getPath()+"jxl.xls";

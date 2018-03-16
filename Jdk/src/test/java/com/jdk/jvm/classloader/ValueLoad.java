@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author e631876
+ * @author Chen,Rui
  * @date 02/28/2018
  * @description
  */
@@ -14,7 +14,7 @@ public class ValueLoad {
     /**
      * -------------------------------------------------------------
      * author       date        comment
-     * e631876   02/28/2018   init version
+     * Chen,Rui   02/28/2018   init version
      * -------------------------------------------------------------
      *
      * @description if directly set static final value ,this will not trigger static failed init
@@ -30,7 +30,7 @@ public class ValueLoad {
     /**
      * -------------------------------------------------------------
      * author       date        comment
-     * e631876   02/28/2018   init version
+     * Chen,Rui   02/28/2018   init version
      * -------------------------------------------------------------
      *
      * @description if one filed ref another field ,this will trigger another field init first.
@@ -43,7 +43,7 @@ public class ValueLoad {
     /**
      * -------------------------------------------------------------
      * author       date        comment
-     * e631876   02/28/2018   init version
+     * Chen,Rui   02/28/2018   init version
      * -------------------------------------------------------------
      *
      * @description if static final field call method to init value,this will trigger all static fiel init

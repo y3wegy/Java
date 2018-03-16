@@ -1,7 +1,7 @@
 package com.jdk.bean.classinfo.singleton;
 
 /**
- * Created by e631876 on 9/11/2017.
+ * Created by Chen,Rui on 9/11/2017.
  */
 public class StaiticSingleton {
     private static StaiticSingleton staticSingleton = new StaiticSingleton();

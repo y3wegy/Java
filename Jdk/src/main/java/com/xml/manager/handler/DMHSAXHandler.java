@@ -6,7 +6,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * Created by e631876 on 9/6/2017.
+ * Created by Chen,Rui on 9/6/2017.
  */
 public class DMHSAXHandler extends DefaultHandler {
     private  static  final Logger logger = Logger.getLogger(DMHSAXHandler.class);

@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
- * @author e631876
+ * @author Chen,Rui
  * @create 1/18/2018
  * @description
  **/

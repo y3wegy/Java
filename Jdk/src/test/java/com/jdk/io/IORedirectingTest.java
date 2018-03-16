@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.*;
 
 /**
- * Created by e631876 on 9/11/2017.
+ * Created by Chen,Rui on 9/11/2017.
  */
 public class IORedirectingTest {
     private static final String FILE_PATH = IORedirectingTest.class.getClassLoader().getResource("data.txt").getFile();

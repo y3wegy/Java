@@ -4,7 +4,7 @@ import com.jdk.generic.ArrayOfGeneric;
 import org.junit.Test;
 
 /**
- * Created by e631876 on 9/12/2017.
+ * Created by Chen,Rui on 9/12/2017.
  */
 public class ArrayOfGenericTest {
     @Test

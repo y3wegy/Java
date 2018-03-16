@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Created by e631876 on 6/8/2017.
+ * Created by Chen,Rui on 6/8/2017.
  */
 
 public class TimedEventSupport {
