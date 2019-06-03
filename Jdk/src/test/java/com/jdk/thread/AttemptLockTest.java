@@ -50,12 +50,9 @@ public class AttemptLockTest {
     public void time() {
         boolean captured = false;
         try {
-            captured = lock.tryLock(2, TimeUnit.SECONDS);
+            lock.lock();
             logger.info("lock.tryLock(2,TimeUnit.SECONDS):" + captured);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } finally {
-            if (captured)
                 lock.unlock();
         }
     }

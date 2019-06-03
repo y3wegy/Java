@@ -6,6 +6,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class HeapStackTest {
+
+    static{
+        System.out.println("!!!!!!!!!!!!!!!!!!");
+    }
     private static final Logger logger = Logger.getLogger(HeapStackTest.class);
 
     private static int a = 10;

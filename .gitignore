@@ -2,3 +2,4 @@
 Jdk/target/
 target/
 /WEB-INF/logs/
+**/logs
