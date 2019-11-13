@@ -14,7 +14,7 @@
     <properties>
         <skip.unit.test>false</skip.unit.test>
         <test.failed.ignore>true</test.failed.ignore>
-        <jackson_version>2.9.1</jackson_version>
+        <jackson_version>2.10.1</jackson_version>
     </properties>
 
     <dependencies>
